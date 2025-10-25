@@ -1,0 +1,1 @@
+# The Complementary Second Zagreb Index
