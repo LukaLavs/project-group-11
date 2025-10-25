@@ -13,4 +13,4 @@ print("Degree of each vertex:", G.degree())
 
 plot = G.plot(vertex_labels=True, vertex_size=400, edge_color='blue', vertex_color='orange')
 
-plot.save("images/simple_graph.png") # When running .sage file paths are relative to script
+plot.save("images/sample_graph.png") # When running .sage file paths are relative to script
