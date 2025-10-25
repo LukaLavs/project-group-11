@@ -228,6 +228,7 @@ build/
 
 # other
 enviroment.yaml
+.envrc
 *.sage.py
 __pycache__/
 *.py[cod]
