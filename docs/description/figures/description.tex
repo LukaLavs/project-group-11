@@ -1,1 +1,72 @@
--
+\documentclass[a4paper,12pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\begin{document}
+
+
+\begin{center}
+    \large \textbf{Komplementarni drugi Zagrebški indeks}\\
+    \large Kratek opis problema in načrt dela\\[1em]
+    Luka Lavš, Tinka Napret-Kaučič\\
+    November, 2025
+\end{center}
+
+
+
+V projektni nalogi z naslovom \textbf{Komplementarni drugi Zagrebški indeks} bova 
+najprej opredelila indeks, nato bova previla konjunkturo. Ob predpostavki, da 
+je konjunktura pravilna, določila $\mathit{k}$ kot funkcijo odvisno od $\mathit{n}$.
+Prav tako bova poiskala kateri grafi imajo najmanjši in najveljo vrednost $cM_2(G)$
+nad grafi z $\mathit{n}$ vozlišči s ciklomatičnim številom $\mathit{k}$.
+
+
+Problem je zanimiv tako z matematičnega kot z računalniškega vidika, saj združuje teorijo 
+grafov, kombinatoriko in optimizacijo. Dodatno se uporablja tudi v kemijskih in omrežnih 
+analizah, kjer opisuje heterogenost vozlišč.
+
+\section*{Opredelitev indeksa}
+
+Indeks komplementarne druge zagrebške lestvice (CSZ indeks) za graf $G$ je definiran kot
+\[
+cM_2(G) = \sum_{uv \in E(G)} \left| d_G(u)^2 - d_G(v)^2 \right|,
+\]
+kjer $d_G(u)$ označuje stopnjo vozlišča $u$ v grafu $G$, $E(G)$ pa predstavlja množico povezav grafa $G$.
+Opozorimo, da znak $+$ v nadaljevanju pomeni \textit{join} dveh grafov.
+
+CSZ indeks sodi med \textit{Zagrebške indekse}, ki se uporabljajo za opisovanju strukturnih lastnosti grafov.
+Indeksi so nastali na področju kemijske teorije grafov, kjer predstavljajo mero razvejanosti molekul,
+v sodobni teoriji grafov pa se uporabljajo za opis topoloških značilnosti in kompleksnosti omrežij.
+
+Za razliko od klasičnega drugega Zagreb indeksa, ki se definira kot vsota produktov stopenj sosednjih vozlišč,
+CSZ indeks meri razliko med kvadrati stopenj vozlišč, povezanih z robom. S tem indeks bolje zazna neuravnoteženost 
+v lokalni strukturi grafa, torej kako različne so stopnje sosednjih vozlišč. Pri višjih vrednosti indeksa $cM_2(G)$ 
+so razlike v stopnjah med sosednjimi vozlišči večje, medtem ko manjše vrednosti predstavljajo bolj homogeno strukturo.
+
+
+\section*{Načrt dela}
+
+Ideja prve faze projekta je analiza in preizkušanje lastnosti grafov glede na njihovo vrednost
+\textit{Complementary Second Zagreb Indexa (CSZ indeksa)}. Najprej bova implementirala funkcijo, ki za dani graf $G$
+izračuna vrednost $cM_2(G)$, pri čemer uporabimo formulo
+\[
+cM_2(G) = \sum_{uv \in E(G)} |d_G(u)^2 - d_G(v)^2|,
+\]
+kjer $d_G(u)$ označuje stopnjo vozlišča $u$ v grafu. Funkcija bo preverjala vse povezave v grafu in za vsako sosednjo
+povezavo izračunala prispevek k skupni vrednosti indeksa. Na podlagi dobljenih vrednosti bova v prvi fazi sistematično 
+preverili grafe manjših redov, da bi ugotovila, kateri grafi imajo največjo oziroma najmanjšo vrednost $cM_2$. Poseben 
+poudarek bo na preverjanju konjekture, da graf, ki maksimizira $cM_2$, ustreza strukturi $K_k + K_{n-k}$ za ustrezen 
+$k < \lceil n/2 \rceil$.
+
+Nato bova za iskanje ekstremnih grafov uporabila \textit{metahevristične metode}. Gre za skupino stohastičnih optimizacijskih 
+pristopov, ki z uporabo naključnosti iščejo čim boljše rešitve v primerih, kjer popolno iskanje postane računsko neizvedljivo. 
+Pri večjih grafih boma uporabila tri metode: genetski algoritem, simulirano ohlajanje in pohlepno iskanje. Namen teh metod ni nujno 
+najti popolno rešitev, temveč dovolj dobro rešitev v razumnem času.
+
+
+
+\end{document}
