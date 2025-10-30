@@ -97,6 +97,146 @@ vsebine.}
 
 \begin{document}
 
+%%%%%%%%%%%% Lavš
+
+\section{Drugi komplementarni zagrebški indeks}
+\begin{definicija}
+Naj bo $G$ graf ter $E(G)$ množica njegovih povezav. Z $d_G(u)$ 
+označimo stopnjo vozlišča $u \in E(G)$. Tedaj definiramo drugi 
+komplementarni zagrebški indeks kot:
+\begin{equation}
+  \cM(G) := \sum_{uv \in E(G)} |\,d_G(u)^2 - d_G(v)^2\,|
+\end{equation} 
+\end{definicija}
+
+Do nedavnega je veljala naslednja domneva, ki pa jo je 
+dokazal \textcite{proof2025}.
+
+\begin{trditev}\label{tr:domneva}
+Naj bo $\mathcal{G}_n$ množica povezanih grafov reda $n$, 
+$K_m$ popoln graf, torej $(m-1)$-regularen, in 
+$\overline{K}_m$ njegov komplement, torej nepovezan graf z $m$ vozlišči.
+
+Tedaj za vsak $n \geq 5$ velja, da če $G^* \in \mathcal{G}_n$ doseže 
+maksimalno vrednost drugega komplementarnega Zagrebškega indeksa 
+$\cM(G)$, potem obstaja $k < \lceil n/2 \rceil$, tak da je $G^*$ 
+izomorfen grafu $K_k + \overline{K}_{n-k}$:
+\begin{equation}
+ \forall\, n \geq 5:\; G^* \in \arg\max_{G \in \mathcal{G}_n} \cM(G)
+  \implies \exists \;k < \lceil \frac{n}{2} \rceil:\  
+    G^* \cong K_k + \KC_{n-k},
+\end{equation}
+kjer je operacija $+$ definirana kot
+\[
+G_1 + G_2 := \big(V_1 \cup V_2,\ E_1 \cup E_2 \cup \{ \{v_1, v_2\} \mid v_1 \in V_1, v_2 \in V_2 \} \big).
+\]
+\end{trditev}
+
+%%%%%%%%%%%%%%%%%%% Lavš
+
+\subsection[k kot funkcija parametra n]{$k$ kot funkcija parametra $n$}
+Ker zdaj po \textcite{proof2025} vemo, da 
+domneva~\ref{tr:domneva} drži, si želimo izraziti $k$ kot 
+funkcijo parametra $n$. V tem razdelku bomo tako funkcijo izpeljali.
+
+\begin{trditev}
+Naj bo $n \geq k$, tedaj je drugi komplementarni zagrebški indeks 
+grafa $G = K_k + \KC_{n-k}$ enak $\cM(G) = k (n-k) ((n-1)^2 - k^2)$.
+\end{trditev}
+
+\begin{dokaz}
+Naj bo  $G = K_k + \KC_{n-k}$. Graf $G$ je očitno dvodelen, 
+zato njegove povezave razdelimo na notranje povezave 
+podgrafa $K_k$, povezave med $K_k$ in 
+$\KC_{n-k}$ ter na notranje povezave podgrafa $\KC_{n-k}$.
+\begin{align*}
+  \cM(G) &= \sum_{uv \in E(G)} |\,d_G(u)^2 - d_G(v)^2\,| \\
+  &= \sum_{uv \in E(K_k)} |\,((k-1) + (n-k))^2 - ((k-1) + (n-k))^2\,| + \\
+    &\sum_{u \in V(K_k)\, \land \,v \in V(\KC_{n-k})}|\,((k-1)+(n-k))^2 - k^2\,| + \\
+    &\sum_{uv \in E(\KC_{n-k})} |\,k^2 - k^2\,| \\
+  &= |V(K_k)| |V(\KC_{n-k})| ((n-1)^2 - k^2) \\
+  &= k (n-k) ((n-1)^2 - k^2)
+\end{align*} 
+\end{dokaz}
+
+Za lažje nadaljevanje brez dokaza navedimo Cardanovo formulo, ki jo bomo 
+uporabili pri naši funkcijski analizi.
+
+\begin{izrek}[Cardanova formula]\label{iz:cardano}
+Naj bo $ax^3 + bx^2 + cx + d = 0$ splošna kubična enačba z $a \neq 0$ ter 
+naj bodo $\Delta_0 = b^2 - 3ac$, $\Delta_1 = 2b^2 - 9abc + 27a^2d$ in 
+$C = \sqrt[3]{\frac{\Delta_1 \pm \sqrt{\Delta_1^2 - 4 \Delta_0^3}}{2}}$. 
+Potem so rešitve dane kubične enačbe enake:
+\begin{equation}
+  x_k = -\frac{1}{3a}\left(b + \xi^k C + \frac{\Delta_0}{\xi^k C}\right),
+\end{equation}
+za $\xi = \frac{-1 + i\sqrt{3}}{2}$, ter $k \in \{0, 1, 2\}$.
+\end{izrek}
+
+\begin{trditev}
+Za dani $n \geq 5$ funkcija $f(n, k) = k (n-k) ((n-1)^2 - k^2)$ 
+doseže maksimum pri 
+\begin{equation}
+  k = \frac{1}{72} * 
+  \left(18n + \frac{\xi(n)}{\sqrt[3]{\psi(n)}} - 6 \sqrt[3]{psi(n)}\right),
+\end{equation}
+kjer sta $\xi$ ter $\psi$ enaka:
+\begin{align*}
+\xi(n) &= 6 \, (-3)^{2/3} \, \bigl( 8 + n(-16 + 11 n) \bigr), \\[2mm]
+\psi(n) &= -9 \,(n-2)\, n \,(3n-2) \\
+&\quad + 4 \sqrt{3} \, \sqrt{-(n-1)^2 \bigl( 32 + n(-128 + n(201 + 2 n(-73 + 34 n))) \bigr) } 
+\end{align*}
+
+. Velja tudi, da je $f$ konkavna na 
+intervalu 
+\[\left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
+\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right]
+\]
+in konveksna drugod.
+\end{trditev}
+
+\begin{dokaz}
+\begin{align}
+\frac{\partial f}{\partial k} = 4k^3 - 3nk^2 - 2(n-1)^2k + n(n-1)^2\label{al:f1}\\
+\frac{\partial^2 f}{\partial k^2} = 12k^2 - 6nk - 2(n-1)^2\label{al:f2}
+\end{align}
+\begin{itemize}
+  \item 
+Ob razrešitvi neenačbe $\frac{\partial^2 f}{\partial k^2} \leq 0$, 
+dobimo rešitev 
+\[
+k \in \left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
+\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right],
+\]
+$f$ je na tem intervalu torej res konkavna, drugod pa konveksna.
+
+  \item 
+uff ...
+\end{itemize}
+\end{dokaz}
+
+%%%%%%%
+
+\begin{posledica}
+Ker je ničla funkcije 
+\[
+f(n, k) = k (n-k) ((n-1)^2 - k^2),
+\] 
+ki pripada območju $[0, \infty)$ zgolj ena, ter je $f$ v njeni okolici konkavna za vsak $n \geq 5$, je iskana funkcija $k$ parametra $n$ enaka:
+\begin{equation}
+\Gamma(n) = \arg\max_{x \in \{ \lceil h(n) \rceil, \lfloor h(n) \rfloor\}} \cM(x),
+\end{equation}
+kjer so $h$, $\xi(n)$ in $\psi(n)$ enaki:
+\begin{align*}
+h(n) &= \frac{1}{72} \left( 18 n + \frac{\xi(n)}{\sqrt[3]{\psi(n)}} - 6 \sqrt[3]{\psi(n)} \right), \\[1mm]
+\xi(n) &= 6 \, (-3)^{2/3} \, \bigl( 8 + n(-16 + 11 n) \bigr), \\[1mm]
+\psi(n) &= -9 (n-2) n (3n-2) \\
+&\quad + 4 \sqrt{3} \, \sqrt{-(n-1)^2 \bigl( 32 + n(-128 + n(201 + 2 n(-73 + 34 n))) \bigr) }.
+\end{align*}
+\end{posledica}
+
+
+
 \section{Naloga}
     \begin{figure}[h]
     \centering
@@ -105,9 +245,6 @@ vsebine.}
     \label{fig:figure2}
     \end{figure}
 
-\section{Razmislek}
-Očitno velja $\cM(K_k + \KC_{n-k}) = k(n-k)((n-1)^2-k^2)$.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Uvod}
 
 Na začetku prvega poglavja/razdelka (ali v samostojnem razdelku z naslovom
