@@ -38,6 +38,12 @@ def optimal_k(n): # TODO: check if it matches literature in README
         key=lambda k: cM2(n, k)
         )
 
+def convex_from(n):
+    return n/4 + sqrt(11*n**2 - 16*n + 8).real / (4 * sqrt(3))
+
+def convex_up_to(n):
+        return n/4 - sqrt(11*n**2 - 16*n + 8).real / (4 * sqrt(3))
+
 def question(q, params={}):
     match q:
         case 1: # k as a function of n

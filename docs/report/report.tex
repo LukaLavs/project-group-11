@@ -85,6 +85,7 @@ vsebine.}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\KC}{\overline{K}}
 \newcommand{\cM}{\operatorname{cM}_2}
+\newcommand{\argmax}{\mathop{\mathrm{arg\,max}}\limits}
 % Lahko se zgodi, da je ukaz \C definiral že paket hyperref,
 % zato dobite napako: Command \C already defined.
 % V tem primeru namesto ukaza \newcommand uporabite \renewcommand
@@ -122,7 +123,7 @@ maksimalno vrednost drugega komplementarnega Zagrebškega indeksa
 $\cM(G)$, potem obstaja $k < \lceil n/2 \rceil$, tak da je $G^*$ 
 izomorfen grafu $K_k + \overline{K}_{n-k}$:
 \begin{equation}
- \forall\, n \geq 5:\; G^* \in \arg\max_{G \in \mathcal{G}_n} \cM(G)
+ \forall\, n \geq 5:\; G^* \in \argmax_{G \in \mathcal{G}_n} \cM(G)
   \implies \exists \;k < \lceil \frac{n}{2} \rceil:\  
     G^* \cong K_k + \KC_{n-k},
 \end{equation}
@@ -165,29 +166,33 @@ uporabili pri naši funkcijski analizi.
 \begin{izrek}[Cardanova formula]\label{iz:cardano}
 Naj bo $ax^3 + bx^2 + cx + d = 0$ splošna kubična enačba z $a \neq 0$ ter 
 naj bodo $\Delta_0 = b^2 - 3ac$, $\Delta_1 = 2b^2 - 9abc + 27a^2d$ in 
-$C = \sqrt[3]{\frac{\Delta_1 \pm \sqrt{\Delta_1^2 - 4 \Delta_0^3}}{2}}$. 
+$C = \sqrt[3]{\frac{\Delta_1 + \sqrt{\Delta_1^2 - 4 \Delta_0^3}}{2}}$. 
 Potem so rešitve dane kubične enačbe enake:
 \begin{equation}
   x_k = -\frac{1}{3a}\left(b + \xi^k C + \frac{\Delta_0}{\xi^k C}\right),
 \end{equation}
-za $\xi = \frac{-1 + i\sqrt{3}}{2}$, ter $k \in \{0, 1, 2\}$.
+za $\xi = e^{2\pi i/3}$, ter $k \in \{0, 1, 2\}$.
 \end{izrek}
 
-\begin{trditev}
-Za dani $n \geq 5$ funkcija $f(n, k) = k (n-k) ((n-1)^2 - k^2)$ 
+\begin{trditev}\label{tr:glavna_k}
+Za poljuben $n \in \R$ funkcija $f(n, k) = k (n-k) ((n-1)^2 - k^2)$ 
 doseže maksimum pri 
-\begin{equation}
-  k = \frac{1}{72} * 
-  \left(18n + \frac{\xi(n)}{\sqrt[3]{\psi(n)}} - 6 \sqrt[3]{psi(n)}\right),
-\end{equation}
-kjer sta $\xi$ ter $\psi$ enaka:
+
 \begin{align*}
-\xi(n) &= 6 \, (-3)^{2/3} \, \bigl( 8 + n(-16 + 11 n) \bigr), \\[2mm]
-\psi(n) &= -9 \,(n-2)\, n \,(3n-2) \\
-&\quad + 4 \sqrt{3} \, \sqrt{-(n-1)^2 \bigl( 32 + n(-128 + n(201 + 2 n(-73 + 34 n))) \bigr) } 
+k = \frac{1}{12} \Big(3 n  -
+\sqrt[3]{3} e^{\frac{4 i \pi}{3}} \sqrt[3]{A} +
+\frac{3^{2/3} B}{e^{\frac{4 i \pi}{3}} \sqrt[3]{A}}
+ \Big),
+\end{align*}
+kjer sta $A$ in $B$ enaka:
+\begin{align*}
+A &= 9 (n-2) n (3 n-2) \\
+  &\quad + 4 \sqrt{3}\, 
+      \sqrt{-(n-1)^2 \bigl(n (n (2 n (34 n-73)+201)-128)+32\bigr)}\ ;\\
+B &= (16-11 n)n - 8.
 \end{align*}
 
-. Velja tudi, da je $f$ konkavna na 
+Velja tudi, da je $f$ konkavna na 
 intervalu 
 \[\left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
 \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right]
@@ -196,6 +201,7 @@ in konveksna drugod.
 \end{trditev}
 
 \begin{dokaz}
+  V dokazu si bomo pomagali s parcialnimi odvodi funkcije $f$:
 \begin{align}
 \frac{\partial f}{\partial k} = 4k^3 - 3nk^2 - 2(n-1)^2k + n(n-1)^2\label{al:f1}\\
 \frac{\partial^2 f}{\partial k^2} = 12k^2 - 6nk - 2(n-1)^2\label{al:f2}
@@ -204,38 +210,107 @@ in konveksna drugod.
   \item 
 Ob razrešitvi neenačbe $\frac{\partial^2 f}{\partial k^2} \leq 0$, 
 dobimo rešitev 
-\[
+\begin{equation}
 k \in \left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
-\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right],
-\]
+\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right],\label{eq:interval_konkavnosti}
+\end{equation}
 $f$ je na tem intervalu torej res konkavna, drugod pa konveksna.
 
-  \item 
-uff ...
+  \item Zanima nas rešitev enačbe $\frac{\partial f}{\partial k} = 0$. 
+Najprej pokažimo, da so vse njene rešitve realne. Res, funkcija 
+$\frac{\partial f}{\partial k}$ doseže maksimuma ravno na robovih 
+intervala konkavnosti~\ref{eq:interval_konkavnosti}. Z numeričnimi ter asimptotskimi 
+metodami se da pokazati, da sta si, za vsak $n$, funkciji v robovih intervala
+nasprotno predznačeni. Velja namreč:
+\begin{align*}
+\frac{\partial f}{\partial k}(n, \frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}})\cdot 
+\frac{\partial f}{\partial k}(n, \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}) \\
+= -\frac{17}{27} n^6 + \frac{47}{18} n^5 - \frac{187}{36} n^4 + \frac{169}{27} n^3 - \frac{163}{36} n^2 + \frac{16}{9} n - \frac{8}{27}
+< 0
+\end{align*}
+
+Sedaj enačbo $\frac{\partial f}{\partial k} = 0$ razrešimo s pomočjo Cardanove 
+formule~\ref{iz:cardano}. Po daljših izračunih dobimo, 
+da je $k$-ta rešitev enačbe enaka:
+\begin{align*}
+x_k = \frac{1}{12} \Big( \underbrace{3 n}_{\text{prvi člen}}  -
+\underbrace{\sqrt[3]{3} e^{\frac{2 i \pi k}{3}} \sqrt[3]{A}}_{\text{drugi člen}} +
+\underbrace{\frac{3^{2/3} e^{-\frac{2 i \pi k}{3}} B}{\sqrt[3]{A}}}_{\text{tretji člen}} 
+ \Big),
+\end{align*}
+kjer se $A$ in $B$ ujemata z definicijama v trditvi~\ref{tr:glavna_k}.
+S tem zaključimo dokaz.
 \end{itemize}
 \end{dokaz}
 
+Lahko pa še pokažemo, da je funkcija $f$, za vsak 
+$n \geq 5$, konkavna tudi na intervalu 
+$[0, \lceil\frac{n}{2}\rceil]$. To res velja, saj 
+\[
+\forall n:\ \frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} \leq 0.
+\]
+Podobno za vsak $n \geq 5$ velja:
+\[
+\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} > \lceil\frac{n}{2}\rceil.
+\]
+Če nam uspe pokazati še, da rešitev $x_k$, ki je po velikosti druga, leži 
+na intervalu $[0, \lceil\frac{n}{2}\rceil]$; potem lahko sklepamo, da je 
+$\argmax_{1 \leq k \leq \lceil n/2\rceil} f$ v neposredni bližini rešitve $x_k$.
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/function_K.pdf}
+\caption{
+$k^* := \displaystyle \argmax_{x \in [0, \lceil n/2 \rceil]} f(n, x)$ in 
+$\Gamma(n) := \displaystyle \argmax_{\substack{x \in [0, \lceil n/2 \rceil] \land x \in \mathbb{N}}} f(n, x)$
+%
+}
+    \label{fig:function_K}
+    \end{figure}
+
+In res empirična in asimptotska analiza pokaže, 
+da je $x_0 \leq x_2 \leq x_1$ za vsak $n$ ter, 
+da $x_2 < \lceil\frac{n}{2}\rceil$ za vsak $n \geq 5$.
+
+Od tu sledi naslednji izrek, katerega smo ravnokar tudi dokazali.
+
 %%%%%%%
 
-\begin{posledica}
-Ker je ničla funkcije 
-\[
-f(n, k) = k (n-k) ((n-1)^2 - k^2),
-\] 
-ki pripada območju $[0, \infty)$ zgolj ena, ter je $f$ v njeni okolici konkavna za vsak $n \geq 5$, je iskana funkcija $k$ parametra $n$ enaka:
+\begin{izrek}[$k$ kot funkcija $n$]\label{iz:funkcija_k}
+Naj bo $\mathcal{G}_n$ množica povezanih grafov reda $n$. Naj bo 
+$\cM : \mathcal{G}_n \rightarrow \R$ funkcija, ki grafu priredi 
+drugi komplementarni zagrebški indeks. Naj bo $\Gamma : \N \rightarrow \N$
+"funkcija"~ s predpisom:
 \begin{equation}
-\Gamma(n) = \arg\max_{x \in \{ \lceil h(n) \rceil, \lfloor h(n) \rfloor\}} \cM(x),
+\Gamma(n) = \argmax_{x \in \{ \lceil h(n) \rceil, \lfloor h(n) \rfloor\}} \cM(x),
 \end{equation}
-kjer so $h$, $\xi(n)$ in $\psi(n)$ enaki:
+kjer so $h$, $A$ ter $B$ podani kot:
 \begin{align*}
-h(n) &= \frac{1}{72} \left( 18 n + \frac{\xi(n)}{\sqrt[3]{\psi(n)}} - 6 \sqrt[3]{\psi(n)} \right), \\[1mm]
-\xi(n) &= 6 \, (-3)^{2/3} \, \bigl( 8 + n(-16 + 11 n) \bigr), \\[1mm]
-\psi(n) &= -9 (n-2) n (3n-2) \\
-&\quad + 4 \sqrt{3} \, \sqrt{-(n-1)^2 \bigl( 32 + n(-128 + n(201 + 2 n(-73 + 34 n))) \bigr) }.
+h(n) = \frac{1}{12} \Big(3 n  -
+\sqrt[3]{3} e^{\frac{4 i \pi}{3}} \sqrt[3]{A} +
+\frac{3^{2/3} B}{e^{\frac{4 i \pi}{3}} \sqrt[3]{A}}
+ \Big);
 \end{align*}
-\end{posledica}
+\begin{align*}
+A &= 9 (n-2) n (3 n-2) \\
+  &\quad + 4 \sqrt{3}\, 
+      \sqrt{-(n-1)^2 \bigl(n (n (2 n (34 n-73)+201)-128)+32\bigr)}\ ;\\
+B &= (16-11 n)n - 8
+\end{align*}
 
+Tedaj za vsak $n \geq 5$ velja:
+\begin{equation}
+  G^* \in \argmax_{G\in\mathcal{G}_n} \cM(G) 
+  \implies \exists k \in \Gamma(n):\ G^* \cong K_{k} + \KC_{n-k}
+\end{equation}
+\end{izrek}
 
+\begin{opomba}
+"Funkcija"~ $\Gamma$ iz izreka~\ref{iz:funkcija_k} ni čista funkcija, 
+saj obstajajo števila $n \geq 5$ za katere je $\Gamma(n)$ množica dveh števil.
+Primeri takih (zaporednih) vrednosti $n$ 
+so: 12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...
+\end{opomba}
 
 \section{Naloga}
     \begin{figure}[h]
