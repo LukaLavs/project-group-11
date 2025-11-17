@@ -312,6 +312,121 @@ Primeri takih (zaporednih) vrednosti $n$
 so: 12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...
 \end{opomba}
 
+
+\subsection{Preverjanje manjših grafov}
+V tem razdelku empirično preverimo doseganje maksimalnih vrednosti drugega komplementarnega 
+Zagrebškega indeksa $\cM(G)$ za vse povezane grafe majhnega reda $n$.
+\begin{enumerate}
+\item Sistematično generiramo vse neizomorfne povezane grafe za izbrana števila vozlišč ($n = 5, 6, 7, 8$).
+\item Za vsak graf izračunamo $\cM(G)$ po definiciji.
+\item Zabeležimo grafe z minimalno in maksimalno vrednostjo indeksa.
+\item Preverimo, ali ima graf z maksimalnim indeksom obliko $K_{k} + \overline{K}_{n-k}$, kot napoveduje izrek.
+\end{enumerate}
+
+
+\subsection{Rezultati za $n=5$, $n=6$, $n=7$, $n=8$}
+
+\section*{Rezultati za $n = 5$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Tip & $cM_2$ vrednost & Je povezava? & $k$ \\
+\hline
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Da & 4 \\
+Maksimalni & 72 & Da & 2 \\
+\hline
+\end{tabular}
+ 
+% graf za n = 5
+
+\section*{Rezultati za $n = 6$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Tip & $cM2$ vrednost & Je join graf? & $k$ vrednost \\
+\hline
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Da & 5 \\
+Maksimalni & 168 & Da & 2 \\
+\hline
+\end{tabular}
+
+\section*{Rezultati za $n = 7$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Tip & $cM2$ vrednost & Je join graf? & $k$ vrednost \\
+\hline
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Da & 6 \\
+Maksimalni & 324 & Da & 3 \\
+\hline
+\end{tabular}
+
+\section*{Rezultati za $n = 8$}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Tip & $cM2$ vrednost & Je join graf? & $k$ vrednost \\
+\hline
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Ne & - \\
+Minimalni & 0 & Da & 7 \\
+Maksimalni & 600 & Da & 3 \\
+\hline
+\end{tabular}
+
+\begin{izrek}[Ekstremalna vrednost komplementarnega drugega Zagrebškega indeksa]
+Naj bo $\mathcal{G}_n$ množica vseh povezanih grafov reda $n$. 
+Za izračunane vrednosti komplementarnega drugega Zagrebškega indeksa
+\[
+\mathcal{M}(G) = \sum_{uv \in E(G)} |\deg(u)^2 - \deg(v)^2|
+\]
+za $G \in \mathcal{G}_n$, kjer je $n=5,6,7,8$, velja:
+Graf $G^*$, ki doseže maksimum indeksa, je izomorfen grafu $K_k + \overline{K}_{n-k}$ 
+za neko $k < \lceil n/2 \rceil$.
+Maksimalna vrednost je natanko
+\[
+\mathcal{M}\left(K_k + \overline{K}_{n-k}\right) = k(n-k)\left((n-1)^2 - k^2\right).
+\]
+Empirična analiza vseh neizomorfnih povezanih grafov in teoretična formula sta skladni 
+ter potrjujeta omenjeno strukturo maksimalnega grafa.
+\end{izrek}
+
+\begin{opomba}
+Poleg maksimalnih vrednosti indeksa se pogosto pojavijo minimalni indeksi pri grafih z 
+velikimi vrednostmi parametra $k$ (tj.\ kjer je večji del grafa popoln, preostanek pa izoliran). 
+V takih primerih je preostali del grafa $\overline{K}_{n-k}$ zelo majhen (npr.\ le eno vozlišče), 
+zato so razlike kvadratov stopenj med povezanimi vozlišči majhne ali celo nič, kar je skladno z 
+definicijo indeksa.
+Pri zelo majhnih vrednostih $n$ (npr.\ $n=3,4$) lahko pride do izjem, saj je takrat število 
+različnih povezanih grafov omejeno in so strukturne posebnosti bolj omejene kot pri večjem $n$.
+
+Zgornji izrek temelji na računalniškem testiranju, ki potrdi domnevo, da je za dovolj velik $n$ 
+(v obravnavanih primerih $n=5,6,7,8$) graf z največjo vrednostjo komplementarnega drugega Zagrebskega 
+indeksa vedno iz oblike $K_k + \overline{K}_{n-k}$ – torej sestavljen iz popolnega grafa $K_k$ in $n-k$ 
+izoliranih vozlišč, med katerima so vse povezave dodane. Empirično ugotovitev potrjuje primerjava indeksa 
+vsem neizomorfnim povezanih grafih, ki jo omogoča algoritemsko preiskovanje.
+\end{opomba}
+
+
+
 \section{Naloga}
     \begin{figure}[h]
     \centering
