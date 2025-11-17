@@ -313,7 +313,7 @@ so: 12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...
 \end{opomba}
 
 
-\subsection{Preverjanje manjših grafov}
+\section{Preverjanje manjših grafov}
 V tem razdelku empirično preverimo doseganje maksimalnih vrednosti drugega komplementarnega 
 Zagrebškega indeksa $\cM(G)$ za vse povezane grafe majhnega reda $n$.
 \begin{enumerate}
@@ -424,6 +424,33 @@ indeksa vedno iz oblike $K_k + \overline{K}_{n-k}$ – torej sestavljen iz popol
 izoliranih vozlišč, med katerima so vse povezave dodane. Empirično ugotovitev potrjuje primerjava indeksa 
 vsem neizomorfnim povezanih grafih, ki jo omogoča algoritemsko preiskovanje.
 \end{opomba}
+
+\section{Analiza minimalnih in maksimalnih vrednosti indeksa glede na ciklomatsko število grafa}
+\subsection*{Definicija ciklomatskega števila}
+
+Naj bo $G = (V, E)$ graf, kjer je $n = |V|$ število vozlišč, $m = |E|$ število robov, in $p$ 
+število povezanih komponent grafa.
+
+\begin{definicija}
+Ciklomatsko število grafa $G$, označeno s $k$, je definirano kot
+\[
+k = m - n + p.
+\]
+Za povezane grafe, kjer je $p = 1$, se formula poenostavi v
+\[
+k = m - n + 1.
+\]
+\end{definicija}
+
+Ciklomatsko število predstavlja število neodvisnih ciklov v grafu. Lahko ga razumemo 
+kot minimalno število robov, ki jih je potrebno odstraniti, da graf spremenimo v drevo. 
+Višje ciklomatsko število pomeni kompleksnejšo strukturo z več neodvisnimi cikli, kar se odraža v večji "mrežnosti" grafa.
+
+Pri analizi povezav med strukturnimi lastnostmi grafov in indeksi, kot je komplementarni drugi Zagrebški indeks, 
+ciklomatsko število omogoča klasifikacijo grafov glede na njihovo topološko kompleksnost. S preiskovanjem grafa s 
+fiksiranim številom vozlišč $n$ in ciklomatskim številom $k$ lahko ugotovimo, kateri grafi v tej skupini imajo 
+ekstremalne vrednosti izbranega indeksa. Takšen pristop omogoča bolj razčlenjen vpogled v vpliv topoloških lastnosti 
+na obravnavane indekse.
 
 
 
