@@ -11,7 +11,7 @@
 \avtor{Ime Priimek}
 
 % - naslov dela v slovenščini
-\naslov{Naslov dela}
+\naslov{Naslov dela} 
 
 % - naslov dela v angleščini
 \title{Angleški prevod slovenskega naslova dela}
@@ -86,6 +86,7 @@ vsebine.}
 \newcommand{\KC}{\overline{K}}
 \newcommand{\cM}{\operatorname{cM}_2}
 \newcommand{\argmax}{\mathop{\mathrm{arg\,max}}\limits}
+\newcommand{\CC}{\mathcal{C}_{n, k}}
 % Lahko se zgodi, da je ukaz \C definiral že paket hyperref,
 % zato dobite napako: Command \C already defined.
 % V tem primeru namesto ukaza \newcommand uporabite \renewcommand
@@ -218,7 +219,7 @@ $f$ je na tem intervalu torej res konkavna, drugod pa konveksna.
 
   \item Zanima nas rešitev enačbe $\frac{\partial f}{\partial k} = 0$. 
 Najprej pokažimo, da so vse njene rešitve realne. Res, funkcija 
-$\frac{\partial f}{\partial k}$ doseže maksimuma ravno na robovih 
+$\frac{\partial f}{\partial k}$ doseže ekstrema ravno na robovih 
 intervala konkavnosti~\ref{eq:interval_konkavnosti}. Z numeričnimi ter asimptotskimi 
 metodami se da pokazati, da sta si, za vsak $n$, funkciji v robovih intervala
 nasprotno predznačeni. Velja namreč:
@@ -451,6 +452,70 @@ ciklomatsko število omogoča klasifikacijo grafov glede na njihovo topološko k
 fiksiranim številom vozlišč $n$ in ciklomatskim številom $k$ lahko ugotovimo, kateri grafi v tej skupini imajo 
 ekstremalne vrednosti izbranega indeksa. Takšen pristop omogoča bolj razčlenjen vpogled v vpliv topoloških lastnosti 
 na obravnavane indekse.
+
+
+\section{Ciklomatični grafi}
+
+\begin{definicija}
+  Naj bo $G$ graf reda $n$, $m$ število njegovih povezav ter $p$ število 
+  povezanih komponent, ki sestavljajo graf $G$. Tedaj je ciklomatično 
+  število $k$ grafa $G$ enako:
+  \[k = m - n + p.\]
+\end{definicija}
+
+Sedaj se osredotočimo na povezane grafe reda $n$ s ciklomatičnem 
+številom $k$. Taki grafi 
+imajo seveda natanko $m = n + k - 1$ povezav. Označimo množico takih grafov 
+s $\CC$. \newline 
+Za dan $n$ ter $k$ opazujmo grafe $G \in \CC$ za katere je drugi komplementarni 
+zagrebški indeks $\cM$ minimalen ter tiste pri katerih je maksimalen. 
+\begin{equation}
+  \min_{G \in \CC} \cM(G) \quad \quad \max_{G \in \CC} \cM(G)
+\end{equation}
+Kot prvo modelirajmo minimizacijski problem  
+s pomočjo mešano številčnega linearnega programiranja. 
+Naj bo za vsak urejen par $i < j$ spremenljivka $x_{ij}$ enaka 1 natanko tedaj 
+ko sta vozlišči $i$ ter $j$ povezani. S $s_i$ modelirajmo kvadrat stopnje $i$-tega vozlišča.
+S $z_{ij}$ modelirajmo absolutno vrednost razlike kvadratov stopenj. S spremenljivkami 
+$f_{uv}$ pa modelirajmo povezanost grafa.
+
+\begin{align}
+&\min \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} z_{ij} \\[1mm]
+&\text{p. p.} \\[1mm]
+&\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} x_{ij} = m \\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad \sum_{t=1}^{n-1} y_{it} = 1 \\[1mm]
+&\forall i \in \{1, \ldots, n\}: \quad \sum_{t=1}^{n-1}t y_{it} = \sum_{j < i}x_{ji} + \sum_{i < j}x_{ij} \\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad s_i = \sum_{t=1}^{n-1} t^2 \, y_{it} \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_i - s_j - (n-1)^2 (1 - x_{ij})\\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_j - s_i - (n-1)^2 (1 - x_{ij})\\[1mm]
+&\forall u,v \in \{1, \dots, n\}, \ u \neq v: \quad f_{uv} \le (n-1) x_{\min(u,v),\max(u,v)} \\[1mm]
+&\forall v \in \{2, \dots, n\}: \quad \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{uv} - \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{vu} = 1 \\[1mm]
+&\sum_{v=2}^{n} f_{1v} = n-1 \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad x_{ij} \in \{0,1\} \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge 0 \\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad s_i \ge 0 \\[1mm]
+&\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
+\end{align}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
