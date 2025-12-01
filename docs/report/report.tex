@@ -401,14 +401,32 @@ $f_{uv}$ pa modelirajmo povezanost grafa.
 &\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
 \end{align}
 
+\section{Metaheuristične metode}
 
+Metaheuristika predstavlja višjenivojsko proceduro ali hevristiko, namenjeno iskanju, generiranju ali izbiri učinkovitih rešitev za kompleksne 
+optimizacijske probleme. V kontekstu analize grafovskih indeksov, kot je komplementarni drugi zagrebški indeks $\cM$, je uporaba metaheurističnih 
+metod ključna pri obravnavi večjih grafov, kjer sistematično testiranje vseh možnosti postane računsko intenzivno. Metaheuristike, kot so genetski 
+algoritmi, simulirano ohlajanje (simulated annealing), optimizacija s kolonijo mravelj (ACO) in optimizacija s čebeljim rojem (PSO), so se izkazale 
+za uspešne pri reševanju NP-težkih kombinatoričnih problemov na grafih.
 
+Pri določanju grafov z maksimalnimi ali minimalnimi vrednostmi $\cM$ indeksa za grafe danega reda in ciklomatskega števila lahko metaheuristične 
+metode poiščejo približne rešitve z bistveno manjšim računskim naporom kot popolno preiskovanje. Simulirano ohlajanje na primer začne z naključno 
+konfiguracijo grafa in nato iterativno spreminja strukturo z naključnimi perturbacijami, pri čemer evalvira vrednost $\cM$ indeksa za vsako konfiguracijo. 
+Genetski algoritmi pa vzporedoma razvijajo populacijo kandidatnih grafovskih struktur, pri čemer uporabljajo operatorje križanja in mutacije za iskanje 
+optimalnih rešitev. Metaheuristični pristop tako omogoča sistematično analizo manjših grafov ter učinkovito eksploriranje prostora rešitev pri večjih grafih, 
+kjer eksaktne metode niso izvedljive v razumnem času.
 
+Omejitve metaheuristik. Kljub njihovi učinkovitosti imajo metaheuristični pristopi tudi pomembne omejitve. Predvsem ne zagotavljajo globalno optimalne rešitve, 
+temveč le približke, ki so lahko kakovostni, vendar niso nujno optimalni. Uspešnost metode je pogosto močno odvisna od izbire parametrov, kar lahko vpliva na 
+konvergenco in stabilnost rezultatov. Da bi se zmanjšala verjetnost ujetja v lokalne minimume, je običajno potrebna večkratna izvedba algoritma z različnimi 
+začetnimi pogoji ali parametri.
 
-
-
-
-
+Komplementarni drugi zagrebški indeks $\cM$ je definiran kot vsota absolutnih vrednosti razlik kvadratov stopenj sosednjih vozlišč v grafu in je zato občutljiv 
+na globalno strukturo grafa. Ker je število vseh preprostih grafov reda $n$ enako $2^{\binom{n}{2}}$, prostor možnih struktur eksponentno narašča, kar hitro 
+onemogoči celovito preiskavo že pri srednje velikih vrednostih $n$. Poleg tega so ekstremalne vrednosti $\cM$ pogosto povezane s specifičnimi strukturnimi lastnostmi 
+grafov, ki jih ni enostavno predvideti iz analitičnih argumentov. Čeprav so za nekatere razrede grafov znani ekstremalni primeri, teoretični rezultati ne pokrivajo 
+splošnega primera za poljubne pare $(n, k)$, kjer je $k$ ciklomatsko število. Metaheuristične metode zato predstavljajo naravno izbiro za učinkovito iskanje grafov, 
+ki maksimizirajo ali minimizirajo $\cM$, ter za generiranje hipotez o potencialnih ekstremalnih strukturah, ki jih lahko kasneje analitično preverimo.
 
 
 
