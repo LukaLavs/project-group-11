@@ -418,6 +418,18 @@ algoritem konvergira k dobri rešitvi.
 
 
 
+\section{Vzorci za minimalne in maksimalne grafe}
+
+Pri minimalnih grafih za ciklomatično število $k$ so minimalni grafi strukturirani kot cikel $C_n$ z $k$ dodatnimi 
+povezavami. Te dodatne povezave so razporejene enakomerno po ciklu, kar zagotavlja majhne razlike med stopnjami 
+sosednjih vozlišč. Pri večjih $n$ ta vzorec postane stabilen, saj si grafi postajajo strukturno podobni.
+
+Za maksimalne grafe pri majhnih $n$ maksimalne vrednosti dosegajo grafi z zvezdasto strukturo, kjer ima eno centralno 
+vozlišče visoko stopnjo, ostala pa nizko. Ko $n$ narašča, se struktura razvije v join graf oblike $K_j + \overline{K}_{n-j}$. 
+Tu je $K_j$ poln graf z $j$ vozlišči, $\overline{K}_{n-j}$ pa množica izoliranih vozlišč, povezanih le na $K_j$. 
+Ta struktura ustvari velika razlika med stopnjami: vozlišča v $K_j$ imajo stopnjo blizu $n$, zunanja pa okoli $j$. 
+Pri večjih $k$ se začnejo dodajati povezave tudi med zunanjimi vozlišči, vendar osnovna zvezdasta oblika ostane prepoznavna.
+
 
 
 
