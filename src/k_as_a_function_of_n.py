@@ -1,6 +1,6 @@
 
-from cmath import sqrt, polar, rect
-from math import ceil, floor
+from cmath import sqrt, polar, rect, exp
+from math import ceil, floor, pi
 
 def cM2(n, k):
     """Complementary second Zagreb index for conjectured graphs"""
@@ -17,11 +17,22 @@ def relaxed_max_cM2(n):
         -(n - 1)**2 * (32 + n*(-128 + n*(201 + 2*n*(-73 + 34*n)))))
     return (1/72 * (18*n + xi / cbrt(psi) - 6 * cbrt(-3) * cbrt(psi))).real
 
+def gamma(n):
+    """By theorem. Equivalent to max_cM2"""
+    A = 9*(n-2)*n*(3*n-2) + 4*sqrt(3)*sqrt(-(n-1)**2 * (n*(n*(2*n*(34*n - 73) + 201) - 128) + 32))
+    B = (16 - 11*n)*n - 8 
+    p = exp(1j * pi / 3)
+    h = 1/12 * (3*n - cbrt(3) * p**4 * cbrt(A) + 3**(2/3)*B/(p**4*cbrt(A)))
+    h = h.real
+    if cM2(n, ceil(h)) == cM2(n, floor(h)):
+        return (floor(h), ceil(h))
+    return max([floor(h), ceil(h)], key=lambda k: cM2(n, k))
+
 def max_cM2(n):
     """argmax_k cM2(n, k)"""
     k = relaxed_max_cM2(n)
     if cM2(n, ceil(k)) == cM2(n, floor(k)):
-        print(f"Two valid graphs for around (n, k)={n, k}. cM2={int(n)}")
+        return (floor(k), ceil(k))
     return max(
         [floor(k), ceil(k)], 
         key=lambda k: cM2(n, k)
@@ -33,6 +44,28 @@ def convex_from(n):
 def convex_up_to(n):
         return n/4 - sqrt(11*n**2 - 16*n + 8).real / (4 * sqrt(3))
 
+def latex_table(m, n, cols=5, space="0.5cm"):
+    values = [(i, max_cM2(i)) for i in range(m, n+1)]
+    print(r"\begin{tabular}{" + "|c|c|"*cols + "}")
+    print(r"\hline")
+    header = " & ".join([r"$n$ & $k$"]*cols)
+    print(header + r"\\ \hline")
+    row = []
+    for n, k in values:
+        if isinstance(k, tuple):
+            k_str = ",".join(map(str, k))
+        else:
+            k_str = str(k)
+        if isinstance(k, tuple):
+            k_str = r"\textbf{" + k_str + "}"
+        row.extend([str(n), k_str])
+        if len(row) == cols*2:
+            print(" & ".join(row) + r"\\ \hline")
+            row = []
+    if row:
+        row += [""]*(cols*2 - len(row))
+        print(" & ".join(row) + r"\\ \hline")
+    print(r"\end{tabular}")
 
 ##### There exist orders n of G, giving two solutions for k,
 # such orders n are: [12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...]
