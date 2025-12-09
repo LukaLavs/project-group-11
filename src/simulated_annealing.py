@@ -77,29 +77,8 @@ class SA:
         )
         return (self.best_state, self.best_E)
     
-
+    
 class FunctionsMin:
-    @staticmethod
-    def cooling_function(change, milp):
-        return math.exp(- change / milp.T)
-    
-    def edge_to_add(self, milp, edges, non_edges):
-        degree = dict(milp.G.degree())
-        weights = [
-            math.exp(100 * (degree[u] + degree[v]) / (milp.T + 10000))
-            for u, v in edges
-        ]
-        return random.choices(edges, weights=weights)[0] 
-    
-    def edge_to_remove(self, milp, edges, non_edges):
-        degree = dict(milp.G.degree())
-        weights = [
-            math.exp(-100 * (degree[u] + degree[v]) / (milp.T + 10000))
-            for u, v in non_edges
-        ]
-        return random.choices(non_edges, weights=weights)[0] 
-    
-class FunctionsMin2:
     def __init__(self):
         self.pick = None
 
@@ -163,37 +142,45 @@ class FunctionsMax:
         self.pick = pick
         return pick[0]
     
+def save_image(best_graph, best_cM2, path):
+    plt.figure(figsize=(6,6))
+    pos = nx.spring_layout(best_graph)
+    nx.draw_networkx_nodes(best_graph, pos, node_color='black',node_size=300)
+    nx.draw_networkx_edges(best_graph, pos, style='dotted')
+    nx.draw_networkx_labels(best_graph, pos, font_size=12, font_color='white')
+    plt.title(f"{_type} cM_2({n=}, {k=}) = {best_cM2}")
 
+    plt.axis("off")
+    plt.savefig(path, dpi=300)
+    plt.close()
 
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
+    import math 
 
-    n = 8; k = 4
+    n = 9; k = 3
     m = n - 1 + k 
-
+    _type = 'min' # OR 'max'
+    functions = FunctionsMin() # OR FunctionsMax()
+    m = n - 1 + k
+    title=f"optimal-graphs-per-cyclomatic-number/{_type}/{_type}_cM_2_n{n}_k{k}.png"
+    if n < math.ceil((3 + math.sqrt(1 + 8*k)) / 2):
+        raise ValueError("Such graph not possible.")
+    print("parameters", n, k, m)
     G = nx.gnm_random_graph(n, m)
     while not nx.is_connected(G):
         G = nx.gnm_random_graph(n, m)
-    print('start')
-
-    functions = FunctionsMax() 
+    print("start")
     sa = SA(
         functions=functions,
         G=G,
-        _type='max',
-        T=10000.0,
-        u=0.995,
+        _type=_type,
+        T=1000000.0,
+        u=0.9,
         seed=None,
     )
+    print(sa.best_E)
     best_graph, best_cM2 = sa.simulated_annealing()
-
-    plt.figure(figsize=(6,6))
-    pos = nx.spring_layout(best_graph)
-    nx.draw(best_graph, pos, with_labels=True, node_color='skyblue', edge_color='gray', node_size=600, font_size=12)
-    plt.savefig("best_graph.png", dpi=300)
-    plt.close()
-    print("Graph saved as best_graph.png")
-
-
-
+    save_image(best_graph, best_cM2, path='best_graph.png')
+    save_image(best_graph, best_cM2, path=title)
 
