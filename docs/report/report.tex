@@ -11,7 +11,7 @@
 \avtor{Luka Lavš, Tinka Napret-Kaučič}
 
 % - naslov dela v slovenščini
-\naslov{Komplementarni drugi zagrebški indeks} 
+\naslov{Komplementarni drugi Zagrebški indeks} 
 
 % - naslov dela v angleščini
 \title{The Complementary Second Zagreb Index}
@@ -24,8 +24,8 @@
 \mentor{dr. Riste Škrekovski}
 \somentor{dr. Timotej Hrga}
 
-% - leto diplome
 \letnica{december, 2025} 
+
 
 % - povzetek v slovenščini
 %   V povzetku na kratko opišite vsebinske rezultate dela. Sem ne sodi razlaga
@@ -41,22 +41,8 @@ vsebine.}
 %   Oznake, ki opisujejo področje dela, so dostopne na strani https://www.ams.org/msc/
 \klasifikacija{74B05, 65N99}
 
-% - ključne besede, ki nastopajo v delu, ločene s \sep
-\kljucnebesede{integracija\sep kompleks\sep \texorpdfstring{$C^*$}{C*}-algebre}
-
-% - angleški prevod ključnih besed
-\keywords{integration\sep complex\sep \texorpdfstring{$C^*$}{C*}-algebras}
-
 % - angleško-slovenski slovar strokovnih izrazov
-\slovar{
-\geslo{continuous}{zvezen}
-\geslo{uniformly continuous}{enakomerno zvezen}
-\geslo{compact}{kompakten -- metrični prostor je kompakten, če ima v njem vsako zaporedje stekališče; podmnožica evklidskega prostora je kompaktna natanko tedaj, ko je omejena in zaprta  }
-\geslo{glide reflection}{zrcalni zdrs ali zrcalni pomik -- tip ravninske evklidske izometrije, ki je kompozitum zrcaljenja in translacije vzdolž iste premice}  
-\geslo{lattice}{mreža}  
-\geslo{link}{splet}
-\geslo{partition}{\textbf{$\sim$ of a set} razdelitev množice; \textbf{$\sim$ of a number} razčlenitev števila}
-}
+\slovar{}
 
 % - ime datoteke z viri (vključno s končnico .bib), če uporabljate BibTeX
 \literatura{literatura.bib}
@@ -101,18 +87,20 @@ vsebine.}
 
 %%%%%%%%%%%% Lavš
 
-\section{Drugi komplementarni zagrebški indeks}
+\section{Drugi komplementarni Zagrebški indeks}
 \begin{definicija}
 Naj bo $G$ graf ter $E(G)$ množica njegovih povezav. Z $d_G(u)$ 
-označimo stopnjo vozlišča $u \in E(G)$. Tedaj definiramo drugi 
-komplementarni zagrebški indeks kot:
+označimo stopnjo vozlišča $u \in E(G)$. Tedaj definirajmo drugi 
+komplementarni Zagrebški indeks (DKZI) kot:
 \begin{equation}
   \cM(G) := \sum_{uv \in E(G)} |\,d_G(u)^2 - d_G(v)^2\,|
 \end{equation} 
 \end{definicija}
 
-Do nedavnega je veljala naslednja domneva, ki pa jo je 
-dokazal \textcite{proof2025}.
+V tem delu se bomo osredotočili na problem, pri katerih povezanih grafih 
+DKZI doseže ekstremne vrednosti. Za začetek 
+navedimo trditev, ki jo je
+dokazal \textcite{proof2025}, leta 2025.
 
 \begin{trditev}\label{tr:domneva}
 Naj bo $\mathcal{G}_n$ množica povezanih grafov reda $n$, 
@@ -122,32 +110,39 @@ $\overline{K}_m$ njegov komplement, torej nepovezan graf z $m$ vozlišči.
 Tedaj za vsak $n \geq 5$ velja, da če $G^* \in \mathcal{G}_n$ doseže 
 maksimalno vrednost drugega komplementarnega Zagrebškega indeksa 
 $\cM(G)$, potem obstaja $k < \lceil n/2 \rceil$, tak da je $G^*$ 
-izomorfen grafu $K_k + \overline{K}_{n-k}$:
+izomorfen grafu $K_k + \overline{K}_{n-k}$. Oziroma krajše:
 \begin{equation}
  \forall\, n \geq 5:\; G^* \in \argmax_{G \in \mathcal{G}_n} \cM(G)
   \implies \exists \;k < \lceil \frac{n}{2} \rceil:\  
-    G^* \cong K_k + \KC_{n-k},
+    G^* \cong K_k + \KC_{n-k}.
 \end{equation}
-kjer je operacija $+$ definirana kot
-\[
-G_1 + G_2 := \big(V_1 \cup V_2,\ E_1 \cup E_2 \cup \{ \{v_1, v_2\} \mid v_1 \in V_1, v_2 \in V_2 \} \big).
-\]
+Tu je operacija $+$ definirana kot \emph{join} grafov, torej za grafa $G$ in $H$ je
+$G + H$ graf, ki ga dobimo tako, da vzamemo disjunktna grafa $G$ in $H$ 
+ter dodamo vse povezave med vsakim vozliščem grafa $G$ in vsakim vozliščem grafa $H$.
 \end{trditev}
 
 %%%%%%%%%%%%%%%%%%% Lavš
 
-\subsection[k kot funkcija parametra n]{$k$ kot funkcija parametra $n$}
-Ker zdaj po \textcite{proof2025} vemo, da 
-domneva~\ref{tr:domneva} drži, si želimo izraziti $k$ kot 
-funkcijo parametra $n$. V tem razdelku bomo tako funkcijo izpeljali.
+\section[k kot funkcija parametra n]{$k$ kot funkcija parametra $n$}
+Trditev~\ref{tr:domneva} nam pove, da so grafi, ki za 
+dano število vozlišč $n$ dosežejo 
+maksimalno vrednost drugega komplementarnega Zagrebškega indeksa, oblike 
+$K_k + \overline{K}_{n-k}$. Glede parametra $k$ pa zgolj omeji območje iskanja 
+na $[0,  \lceil \frac{n}{2} \rceil]$. S tem se ne zadovoljimo prehitro ter 
+analitično poiščimo funkcijo $\Gamma$, ki bo za dani parameter $n$ vrnila ustrezno 
+število $k$.
 
-\begin{trditev}
-Naj bo $n \geq k$, tedaj je drugi komplementarni zagrebški indeks 
+Najprej predstavimo DKZI grafa iz trditve~\ref{tr:domneva} 
+kot funkcijo parametrov $n$ in $k$. Nato pa dano funkcijo maksimizirajmo, kjer se seveda 
+omejimo na naravna števila.
+
+\begin{trditev}\label{tr:fnk}
+Naj bo $n \geq k$, tedaj je DKZI 
 grafa $G = K_k + \KC_{n-k}$ enak $\cM(G) = k (n-k) ((n-1)^2 - k^2)$.
 \end{trditev}
 
 \begin{dokaz}
-Naj bo  $G = K_k + \KC_{n-k}$. Graf $G$ je očitno dvodelen, 
+Naj bo  $G = K_k + \KC_{n-k}$. Graf $G$ je očitno sestavljen iz dveh gruč,
 zato njegove povezave razdelimo na notranje povezave 
 podgrafa $K_k$, povezave med $K_k$ in 
 $\KC_{n-k}$ ter na notranje povezave podgrafa $\KC_{n-k}$.
@@ -161,8 +156,10 @@ $\KC_{n-k}$ ter na notranje povezave podgrafa $\KC_{n-k}$.
 \end{align*} 
 \end{dokaz}
 
-Za lažje nadaljevanje brez dokaza navedimo Cardanovo formulo, ki jo bomo 
-uporabili pri naši funkcijski analizi.
+Sedaj funkcijo imamo, označimo jo z $f(n, k) = k (n-k) ((n-1)^2 - k^2)$.
+Najprej poiščimo njen maksimum (pri fiksnem n) na množici realnih števil. 
+Pri tem si bomo pomagali s Cardanovo formulo~\cite{cardano} ter z analizo 
+odvodov.
 
 \begin{izrek}[Cardanova formula]\label{iz:cardano}
 Naj bo $ax^3 + bx^2 + cx + d = 0$ splošna kubična enačba z $a \neq 0$ ter 
@@ -170,9 +167,9 @@ naj bodo $\Delta_0 = b^2 - 3ac$, $\Delta_1 = 2b^2 - 9abc + 27a^2d$ in
 $C = \sqrt[3]{\frac{\Delta_1 + \sqrt{\Delta_1^2 - 4 \Delta_0^3}}{2}}$. 
 Potem so rešitve dane kubične enačbe enake:
 \begin{equation}
-  x_k = -\frac{1}{3a}\left(b + \xi^k C + \frac{\Delta_0}{\xi^k C}\right),
+  x_j = -\frac{1}{3a}\left(b + \xi^j C + \frac{\Delta_0}{\xi^j C}\right),
 \end{equation}
-za $\xi = e^{2\pi i/3}$, ter $k \in \{0, 1, 2\}$.
+za $\xi = e^{2\pi i/3}$, ter $j \in \{0, 1, 2\}$.
 \end{izrek}
 
 \begin{trditev}\label{tr:glavna_k}
@@ -185,7 +182,7 @@ k = \frac{1}{12} \Big(3 n  -
 \frac{3^{2/3} B}{e^{\frac{4 i \pi}{3}} \sqrt[3]{A}}
  \Big),
 \end{align*}
-kjer sta $A$ in $B$ enaka:
+kjer sta $A$ in $B$ definirana kot:
 \begin{align*}
 A &= 9 (n-2) n (3 n-2) \\
   &\quad + 4 \sqrt{3}\, 
@@ -193,7 +190,7 @@ A &= 9 (n-2) n (3 n-2) \\
 B &= (16-11 n)n - 8.
 \end{align*}
 
-Velja tudi, da je $f$ konkavna na 
+\noindent Velja tudi, da je $f$ konkavna na 
 intervalu 
 \[\left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
 \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right]
@@ -202,27 +199,23 @@ in konveksna drugod.
 \end{trditev}
 
 \begin{dokaz}
-  V dokazu si bomo pomagali s parcialnimi odvodi funkcije $f$:
-\begin{align}
+  V dokazu si bomo pomagali s parcialnima odvodoma funkcije $f$:
+\begin{gather}
 \frac{\partial f}{\partial k} = 4k^3 - 3nk^2 - 2(n-1)^2k + n(n-1)^2\label{al:f1}\\
 \frac{\partial^2 f}{\partial k^2} = 12k^2 - 6nk - 2(n-1)^2\label{al:f2}
-\end{align}
-\begin{itemize}
-  \item 
-Ob razrešitvi neenačbe $\frac{\partial^2 f}{\partial k^2} \leq 0$, 
-dobimo rešitev 
+\end{gather}
+
+Kvadratna neenačba $\frac{\partial^2 f}{\partial k^2} \leq 0$, glede na parameter $k$,
+nam da rešitev 
 \begin{equation}
 k \in \left[\frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\,,
 \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}\right],\label{eq:interval_konkavnosti}
 \end{equation}
-$f$ je na tem intervalu torej res konkavna, drugod pa konveksna.
+$f$ je torej tu res konkavna.
 
-  \item Zanima nas rešitev enačbe $\frac{\partial f}{\partial k} = 0$. 
-Najprej pokažimo, da so vse njene rešitve realne. Res, funkcija 
-$\frac{\partial f}{\partial k}$ doseže ekstrema ravno na robovih 
-intervala konkavnosti~\ref{eq:interval_konkavnosti}. Z numeričnimi ter asimptotskimi 
-metodami se da pokazati, da sta si, za vsak $n$, funkciji v robovih intervala
-nasprotno predznačeni. Velja namreč:
+Pokažimo, da so vse rešitve enačbe  $\frac{\partial f}{\partial k} = 0$
+realne. To velja, saj sta si vrednosti ekstremov funkcije $\frac{\partial f}{\partial k}$ 
+(parametra $k$) nasprotno predznačeni. Velja namreč:
 \begin{align*}
 \frac{\partial f}{\partial k}(n, \frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}})\cdot 
 \frac{\partial f}{\partial k}(n, \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}}) \\
@@ -230,37 +223,37 @@ nasprotno predznačeni. Velja namreč:
 < 0
 \end{align*}
 
-Sedaj enačbo $\frac{\partial f}{\partial k} = 0$ razrešimo s pomočjo Cardanove 
-formule~\ref{iz:cardano}. Po daljših izračunih dobimo, 
-da je $k$-ta rešitev enačbe enaka:
+Sedaj pa enačbo $\frac{\partial f}{\partial k} = 0$ razrešimo s pomočjo Cardanove 
+formule~\ref{iz:cardano}. Po nekaj izračunih vidimo, 
+da je $j$-ta rešitev enačbe enaka:
 \begin{align*}
-x_k = \frac{1}{12} \Big( \underbrace{3 n}_{\text{prvi člen}}  -
-\underbrace{\sqrt[3]{3} e^{\frac{2 i \pi k}{3}} \sqrt[3]{A}}_{\text{drugi člen}} +
-\underbrace{\frac{3^{2/3} e^{-\frac{2 i \pi k}{3}} B}{\sqrt[3]{A}}}_{\text{tretji člen}} 
+x_j = \frac{1}{12} \Big( \underbrace{3 n}_{\text{prvi člen}}  -
+\underbrace{\sqrt[3]{3} e^{\frac{2 i \pi j}{3}} \sqrt[3]{A}}_{\text{drugi člen}} +
+\underbrace{\frac{3^{2/3} e^{-\frac{2 i \pi j}{3}} B}{\sqrt[3]{A}}}_{\text{tretji člen}} 
  \Big),
 \end{align*}
-kjer se $A$ in $B$ ujemata z definicijama v trditvi~\ref{tr:glavna_k}.
+kjer sta $A$ in $B$ enaka kot v trditvi~\ref{tr:glavna_k}.
 S tem zaključimo dokaz.
-\end{itemize}
+
 \end{dokaz}
 
-Lahko pa še pokažemo, da je funkcija $f$, za vsak 
+Z nekaj dodatnimi izračuni lahko še pokažemo, da je funkcija $f$, za vsak 
 $n \geq 5$, konkavna tudi na intervalu 
-$[0, \lceil\frac{n}{2}\rceil]$. To res velja, saj 
+$[0, \lceil\frac{n}{2}\rceil]$. To je res, saj 
 \[
-\forall n:\ \frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} \leq 0.
+\forall n \in \R:\ \frac{n}{4} - \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} \leq 0.
 \]
-Podobno za vsak $n \geq 5$ velja:
+in tudi:
 \[
-\frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} > \lceil\frac{n}{2}\rceil.
+\forall n \geq 5:\ \frac{n}{4} + \frac{\sqrt{11n^2 - 16n +8}}{4\sqrt{3}} > \lceil\frac{n}{2}\rceil.
 \]
-Če nam uspe pokazati še, da rešitev $x_k$, ki je po velikosti druga, leži 
+Če nam uspe pokazati še, da rešitev $x_j$, ki je po velikosti druga, leži 
 na intervalu $[0, \lceil\frac{n}{2}\rceil]$; potem lahko sklepamo, da je 
-$\argmax_{1 \leq k \leq \lceil n/2\rceil} f$ v neposredni bližini rešitve $x_k$.
+$\argmax_{1 \leq k \leq \lceil n/2\rceil} f$ v neposredni bližini rešitve $x_j$.
 
     \begin{figure}[h]
     \centering
-    \includegraphics[width=1\textwidth]{figures/function_K.pdf}
+    \includegraphics[width=0.6\textwidth]{figures/function_K.pdf}
 \caption{
 $k^* := \displaystyle \argmax_{x \in [0, \lceil n/2 \rceil]} f(n, x)$ in 
 $\Gamma(n) := \displaystyle \argmax_{\substack{x \in [0, \lceil n/2 \rceil] \land x \in \mathbb{N}}} f(n, x)$
@@ -271,16 +264,17 @@ $\Gamma(n) := \displaystyle \argmax_{\substack{x \in [0, \lceil n/2 \rceil] \lan
 
 In res empirična in asimptotska analiza pokaže, 
 da je $x_0 \leq x_2 \leq x_1$ za vsak $n$ ter, 
-da $x_2 < \lceil\frac{n}{2}\rceil$ za vsak $n \geq 5$.
+da $0 < x_2 < \lceil\frac{n}{2}\rceil$ za vsak $n \geq 5$.
 
-Od tu sledi naslednji izrek, katerega smo ravnokar tudi dokazali.
+Od tu sledi naslednji izrek, katerega smo ravnokar tudi dokazali. Funkcijo $\Gamma$ smo namreč 
+našli.
 
 %%%%%%%
 
 \begin{izrek}[$k$ kot funkcija $n$]\label{iz:funkcija_k}
 Naj bo $\mathcal{G}_n$ množica povezanih grafov reda $n$. Naj bo 
-$\cM : \mathcal{G}_n \rightarrow \R$ funkcija, ki grafu priredi 
-drugi komplementarni zagrebški indeks. Naj bo $\Gamma : \N \rightarrow \N$
+$\cM : \mathcal{G}_n \rightarrow \R$ funkcija, ki grafu priredi DKZI. 
+Naj bo $\Gamma : \N \rightarrow \N$
 "funkcija"~ s predpisom:
 \begin{equation}
 \Gamma(n) = \argmax_{x \in \{ \lceil h(n) \rceil, \lfloor h(n) \rfloor\}} \cM(x),
@@ -312,6 +306,144 @@ saj obstajajo števila $n \geq 5$ za katere je $\Gamma(n)$ množica dveh števil
 Primeri takih (zaporednih) vrednosti $n$ 
 so: 12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...
 \end{opomba}
+
+Opremljeni s funkcijo $\Gamma$ prikažimo tabelo vrednosti $k$ za dane $n$, ki po 
+trditvi~\ref{tr:domneva} tvorijo graf, ki doseže maksimalen DKZI. Ta tabela nadaljuje 
+vrednosti tabele, ki so jo podali \textcite{saber2025}. \newline\newline
+{\scriptsize
+\begin{center}
+\begin{tabular}{|c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
+\hline
+$n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$\\ \hline
+150 & 58 & 151 & 59 & 152 & 59 & 153 & 60 & 154 & 60 & 155 & 60 & 156 & 61\\ \hline
+157 & 61 & 158 & 62 & 159 & 62 & 160 & 62 & 161 & 63 & 162 & 63 & 163 & 63\\ \hline
+164 & 64 & 165 & 64 & 166 & 65 & 167 & 65 & 168 & 65 & 169 & 66 & 170 & 66\\ \hline
+171 & 67 & 172 & 67 & 173 & 67 & 174 & 68 & 175 & 68 & 176 & 69 & 177 & 69\\ \hline
+178 & 69 & 179 & 70 & 180 & 70 & 181 & 70 & 182 & 71 & 183 & 71 & 184 & 72\\ \hline
+185 & 72 & 186 & 72 & 187 & 73 & 188 & 73 & 189 & 74 & 190 & 74 & 191 & 74\\ \hline
+192 & 75 & 193 & 75 & 194 & 76 & 195 & 76 & 196 & 76 & 197 & 77 & 198 & 77\\ \hline
+199 & 78 & 200 & 78 & 201 & 78 & 202 & 79 & 203 & 79 & 204 & 79 & 205 & 80\\ \hline
+206 & 80 & 207 & 81 & 208 & 81 & 209 & 81 & 210 & 82 & 211 & 82 & 212 & 83\\ \hline
+213 & 83 & 214 & 83 & 215 & 84 & 216 & 84 & 217 & 85 & 218 & 85 & 219 & 85\\ \hline
+220 & 86 & 221 & 86 & 222 & 86 & 223 & 87 & 224 & 87 & 225 & 88 & 226 & 88\\ \hline
+227 & 88 & 228 & 89 & 229 & 89 & 230 & 90 & 231 & 90 & 232 & 90 & 233 & 91\\ \hline
+234 & 91 & 235 & 92 & 236 & 92 & 237 & 92 & 238 & 93 & 239 & 93 & 240 & 94\\ \hline
+241 & 94 & 242 & 94 & 243 & 95 & 244 & 95 & 245 & 95 & 246 & 96 & 247 & 96\\ \hline
+248 & 97 & 249 & 97 & 250 & 97 & 251 & 98 & 252 & 98 & 253 & 99 & 254 & 99\\ \hline
+255 & 99 & 256 & 100 & 257 & 100 & 258 & 101 & 259 & 101 & 260 & 101 & 261 & 102\\ \hline
+262 & 102 & 263 & 102 & 264 & 103 & 265 & 103 & 266 & 104 & 267 & 104 & 268 & 104\\ \hline
+269 & 105 & 270 & 105 & 271 & 106 & 272 & 106 & 273 & 106 & 274 & 107 & 275 & 107\\ \hline
+276 & 108 & 277 & 108 & 278 & 108 & 279 & 109 & 280 & 109 & 281 & 110 & 282 & 110\\ \hline
+283 & 110 & 284 & 111 & 285 & 111 & 286 & 111 & 287 & 112 & 288 & 112 & 289 & 113\\ \hline
+290 & 113 & 291 & 113 & 292 & 114 & 293 & 114 & 294 & 115 & 295 & 115 & 296 & 115\\ \hline
+297 & 116 & 298 & 116 & 299 & 117 & 300 & 117 & 301 & 117 & 302 & 118 & 303 & 118\\ \hline
+304 & 119 & 305 & 119 & 306 & 119 & 307 & 120 & 308 & 120 & 309 & 120 & 310 & 121\\ \hline
+311 & 121 & 312 & 122 & 313 & 122 & 314 & 122 & 315 & 123 & 316 & 123 & 317 & 124\\ \hline
+318 & 124 & 319 & 124 & 320 & 125 & 321 & 125 & 322 & 126 & 323 & 126 & 324 & 126\\ \hline
+325 & 127 & 326 & 127 & 327 & 127 & 328 & 128 & 329 & 128 & 330 & 129 & 331 & 129\\ \hline
+332 & 129 & 333 & 130 & 334 & 130 & 335 & 131 & 336 & 131 & 337 & 131 & 338 & 132\\ \hline
+339 & 132 & 340 & 133 & 341 & 133 & 342 & 133 & 343 & 134 & 344 & 134 & 345 & 135\\ \hline
+346 & 135 & 347 & 135 & 348 & 136 & 349 & 136 & 350 & 136 & 351 & 137 & 352 & 137\\ \hline
+353 & 138 & 354 & 138 & 355 & 138 & 356 & 139 & 357 & 139 & 358 & 140 & 359 & 140\\ \hline
+360 & 140 & 361 & 141 & 362 & 141 & 363 & 142 & 364 & 142 & 365 & 142 & 366 & 143\\ \hline
+367 & 143 & 368 & 143 & 369 & 144 & 370 & 144 & 371 & 145 & 372 & 145 & 373 & 145\\ \hline
+374 & 146 & 375 & 146 & 376 & 147 & 377 & 147 & 378 & 147 & 379 & 148 & 380 & 148\\ \hline
+381 & 149 & 382 & 149 & 383 & 149 & 384 & 150 & 385 & 150 & 386 & 151 & 387 & 151\\ \hline
+388 & 151 & 389 & 152 & 390 & 152 & 391 & 152 & 392 & 153 & 393 & 153 & 394 & 154\\ \hline
+395 & 154 & 396 & 154 & 397 & 155 & 398 & 155 & 399 & 156 & 400 & 156 & 401 & 156\\ \hline
+402 & 157 & 403 & 157 & 404 & 158 & 405 & 158 & 406 & 158 & 407 & 159 & 408 & 159\\ \hline
+409 & 159 & 410 & 160 & 411 & 160 & 412 & 161 & 413 & 161 & 414 & 161 & 415 & 162\\ \hline
+416 & 162 & 417 & 163 & 418 & 163 & 419 & 163 & 420 & 164 & 421 & 164 & 422 & 165\\ \hline
+423 & 165 & 424 & 165 & 425 & 166 & 426 & 166 & 427 & 167 & 428 & 167 & 429 & 167\\ \hline
+430 & 168 & 431 & 168 & 432 & 168 & 433 & 169 & 434 & 169 & 435 & 170 & 436 & 170\\ \hline
+437 & 170 & 438 & 171 & 439 & 171 & 440 & 172 & 441 & 172 & 442 & 172 & 443 & 173\\ \hline
+444 & 173 & 445 & 174 & 446 & 174 & 447 & 174 & 448 & 175 & 449 & 175 & 450 & \textbf{175,176}\\ \hline
+\end{tabular}
+\end{center}
+}
+
+\section{Grafi danega ciklomatičnega števila}
+
+Problem maksimalne vrednosti drugega komplementarnega Zagrebškega indeksa pri danem številu 
+vozlišč smo rešili. Optimalen graf, je dan s trditvama~\ref{tr:domneva} in~\ref{tr:glavna_k}.
+Podobno je znana tudi optimalna vrednost s trditvama~\ref{tr:fnk} in~\ref{tr:glavna_k}.
+
+V tem poglavju pa problem razširimo in se posvetimo grafom, ki za dano število vozlišč $n$ 
+in dano število povezav $m$ dosežejo bodisi minimum bodisi maksimum drugega komplementarnega Zagrebškega 
+indeksa. Ker se število povezav da enolično določiti s številom vozlišč in ciklomatičnem številom $\nu$,
+si za lažje prepoznavanje vzorcev raje ogledujmo grafe reda $n$ ter ciklomatičnega števila $\nu$.
+
+\begin{definicija}
+  Naj bo $G$ graf reda $n$, $m$ število njegovih povezav ter $p$ število 
+  povezanih komponent, ki sestavljajo graf $G$. Tedaj je ciklomatično 
+  število $k$ grafa $G$ enako:
+  \[\nu = m - n + p.\]
+  Povezani grafi reda $n$ s ciklomatičnem številom $\nu$ imajo torej $m=n - 1 + \nu$ povezav.
+\end{definicija}
+
+\begin{trditev}
+  Naj bo $G$ povezan graf reda $n$ ter s ciklomatičnem številom $\nu$, tedaj 
+  ima $n \geq \lceil (3 + \sqrt(1 + 8\nu))/2 \rceil$ vozlišč. Namreč to sledi iz tega,
+  da ima graf lahko največ toliko povezav kot bi jih imel, če bi bil poln.
+\end{trditev}
+
+\subsection{Problem minimuma}
+
+Najprej se osredotočimo na grafe, ki pri danem $n$ in $\nu$ DKZI
+minimizirajo. Manjše grafe poiščimo s pomočjo mešano celoštevilskega linearnega programiranja
+(MILP),
+večje pa poiščimo s preprosto heuristično metodo simulated annealing (SA).
+
+MILP za problem mimimuma je sledeč: 
+Naj bo za vsak urejen par $i < j$ spremenljivka $x_{ij}$ enaka 1 natanko tedaj 
+ko sta vozlišči $i$ ter $j$ povezani. S $s_i$ modelirajmo kvadrat stopnje $i$-tega vozlišča.
+S $z_{ij}$ modelirajmo absolutno vrednost razlike kvadratov stopenj. S spremenljivkami 
+$f_{uv}$ pa modelirajmo povezanost grafa.
+
+\begin{align}
+&\min \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} z_{ij} \\[1mm]
+&\text{p. p.} \\[1mm]
+&\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} x_{ij} = m := n - 1 + \nu\\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad \sum_{t=1}^{n-1} y_{it} = 1 \\[1mm]
+&\forall i \in \{1, \ldots, n\}: \quad \sum_{t=1}^{n-1}t y_{it} = \sum_{j < i}x_{ji} + \sum_{i < j}x_{ij} \\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad s_i = \sum_{t=1}^{n-1} t^2 \, y_{it} \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_i - s_j - (n-1)^2 (1 - x_{ij})\\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_j - s_i - (n-1)^2 (1 - x_{ij})\\[1mm]
+&\forall u,v \in \{1, \dots, n\}, \ u \neq v: \quad f_{uv} \le (n-1) x_{\min(u,v),\max(u,v)} \\[1mm]
+&\forall v \in \{2, \dots, n\}: \quad \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{uv} - \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{vu} = 1 \\[1mm]
+&\sum_{v=2}^{n} f_{1v} = n-1 \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad x_{ij} \in \{0,1\} \\[1mm]
+&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge 0 \\[1mm]
+&\forall i \in \{1, \dots, n\}: \quad s_i \ge 0 \\[1mm]
+&\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
+\end{align}
+
+Najdeni grafi so sledeči, pri čemer pa je vredno omeniti, da prikazani grafi za dan red $n$ ter 
+ciklomatično število $\nu$ niso unikatni. 
+
+\begin{hipoteza}
+  Z $G_{n, \nu}$ označimo graf reda $n$, ki za dano ciklomatično število $\nu$ doseže
+  minimalno vrednost DKZI, tedaj velja:
+  \begin{enumerate}
+    \item $\forall n\geq 7:\ \cM(G_{n, 2}) = 16$
+    \item $\forall \nu\geq 3, \geq 2\nu:\ \cM(G_{2\nu - 1, \nu}) = 10$.
+    \item $\forall \nu\geq 3, \forall n\geq 2\nu:\ \cM(G_{n, \nu}) = 8$.
+  \end{enumerate}
+\end{hipoteza}
+
+\subsection{Problem maksimuma}
+
+
+\begin{hipoteza}
+  Z $G_{n, \nu}$ označimo graf reda $n$, ki za dano ciklomatično število $\nu$ doseže maksimalno 
+  vrednost DKZI, tedaj velja:
+  \begin{enumerate}
+    \item Naj bo $Z_n$ zvezda, $\KC_n$ prazen graf ter $K_1$ enovozliščen graf. Za 
+    poljuben $\nu$ in za vsak $n \geq \nu + 2$ velja 
+    $G_{n, \nu} = (Z_{\nu + 1} \cup \KC_{n - \nu - 2} + K_1)$ in 
+    $\cM(G_{n, \nu}) = 2\nu [(n-1)^2 - 4] + (n-\nu-2) [(n-1)^2 - 1]$.
+  \end{enumerate}
+\end{hipoteza}
 
 
 \section{Preverjanje manjših grafov}
@@ -357,50 +489,6 @@ kar je skladno z trditvijo~\ref{tr:domneva}.
 Na slikah so prikazani minimalni in maksimalni grafi za $n = 3, 4, 5$.  
 % SLIKE ZA N = 3,4,5
 
-
-\section{Ciklomatični grafi}
-
-\begin{definicija}
-  Naj bo $G$ graf reda $n$, $m$ število njegovih povezav ter $p$ število 
-  povezanih komponent, ki sestavljajo graf $G$. Tedaj je ciklomatično 
-  število $k$ grafa $G$ enako:
-  \[k = m - n + p.\]
-\end{definicija}
-
-Sedaj se osredotočimo na povezane grafe reda $n$ s ciklomatičnem 
-številom $k$. Taki grafi 
-imajo seveda natanko $m = n + k - 1$ povezav. Označimo množico takih grafov 
-s $\CC$. \newline 
-Za dan $n$ ter $k$ opazujmo grafe $G \in \CC$ za katere je drugi komplementarni 
-zagrebški indeks $\cM$ minimalen ter tiste pri katerih je maksimalen. 
-\begin{equation}
-  \min_{G \in \CC} \cM(G) \quad \quad \max_{G \in \CC} \cM(G)
-\end{equation}
-Kot prvo modelirajmo minimizacijski problem  
-s pomočjo mešano številčnega linearnega programiranja. 
-Naj bo za vsak urejen par $i < j$ spremenljivka $x_{ij}$ enaka 1 natanko tedaj 
-ko sta vozlišči $i$ ter $j$ povezani. S $s_i$ modelirajmo kvadrat stopnje $i$-tega vozlišča.
-S $z_{ij}$ modelirajmo absolutno vrednost razlike kvadratov stopenj. S spremenljivkami 
-$f_{uv}$ pa modelirajmo povezanost grafa.
-
-\begin{align}
-&\min \sum_{i=1}^{n-1} \sum_{j=i+1}^{n} z_{ij} \\[1mm]
-&\text{p. p.} \\[1mm]
-&\sum_{i=1}^{n-1} \sum_{j=i+1}^{n} x_{ij} = m \\[1mm]
-&\forall i \in \{1, \dots, n\}: \quad \sum_{t=1}^{n-1} y_{it} = 1 \\[1mm]
-&\forall i \in \{1, \ldots, n\}: \quad \sum_{t=1}^{n-1}t y_{it} = \sum_{j < i}x_{ji} + \sum_{i < j}x_{ij} \\[1mm]
-&\forall i \in \{1, \dots, n\}: \quad s_i = \sum_{t=1}^{n-1} t^2 \, y_{it} \\[1mm]
-&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_i - s_j - (n-1)^2 (1 - x_{ij})\\[1mm]
-&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge s_j - s_i - (n-1)^2 (1 - x_{ij})\\[1mm]
-&\forall u,v \in \{1, \dots, n\}, \ u \neq v: \quad f_{uv} \le (n-1) x_{\min(u,v),\max(u,v)} \\[1mm]
-&\forall v \in \{2, \dots, n\}: \quad \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{uv} - \sum_{\substack{u=1 \\ u \neq v}}^{n} f_{vu} = 1 \\[1mm]
-&\sum_{v=2}^{n} f_{1v} = n-1 \\[1mm]
-&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad x_{ij} \in \{0,1\} \\[1mm]
-&\forall i,j \in \{1, \dots, n\}, \ i < j: \quad z_{ij} \ge 0 \\[1mm]
-&\forall i \in \{1, \dots, n\}: \quad s_i \ge 0 \\[1mm]
-&\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
-\end{align}
-
 \section{Metaheuristične metode}
 
 Metaheuristika je množica algoritemskih konceptov in strategij visoke ravni, ki se uporabljajo
@@ -412,206 +500,6 @@ Za večje grafe ($n \geq 20$), kjer točne metode (MILP) postanejo računsko pre
 in jo iterativno izboljšuje z zamenjavo povezav v grafu. Na začetku (pri visoki temperaturi) algoritem 
 sprejema tudi slabše rešitve, kar omogoča izogibanje lokalnim optimumom. S časom temperatura pada in 
 algoritem konvergira k dobri rešitvi.
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Naloga}
-    \begin{figure}[h]
-    \centering
-    \includegraphics[width=1\textwidth]{figures/task.png}
-    \caption{Problem}
-    \label{fig:figure2}
-    \end{figure}
-
-\section{Uvod}
-
-Na začetku prvega poglavja/razdelka (ali v samostojnem razdelku z naslovom
-Uvod) napišite kratek zgodovinski in matematični uvod. Pojasnite motivacijo za
-problem, kje nastopa, kje vse je bil obravnavan. Na koncu opišite tudi
-organizacijo dela -- kaj je v kakšnem razdelku.
-
-Če se uvod naravno nadaljuje v besedilo prvega poglavja, lahko nadaljujete z
-besedilom v istem razdelku, sicer začnete novega. Na začetku vsakega
-razdelka/podraz\-delka poveste, čemu se bomo posvetili v nadaljevanju. Pri
-pisanju uporabljajte ukaze za matematična okolja, med formalnimi enotami
-dodajte vezno razlagalno besedilo.
-
-\section{Zveznost}
-
-V tem poglavju bomo ponovili osnovne pojme, povezane z zveznostjo funkcij. Pri
-tem bomo sledili~\cite{glob}.
-
-Viri se v seznamu literature prikažejo le, če jih uporabimo v besedilu,
-zato moramo citirati tudi~\cite{lang,zbornik,kalisnik,wiki,vec-avtorjev}.
-
-\begin{definicija}
-Funkcija $f\colon [a,b]\to\R$ je \emph{zvezna}, če \ldots
-\end{definicija}
-
-Podrobneje si poglejmo naslednji rezultat. Ker se bomo kasneje nanj sklicevali,
-si pripravimo oznako z ukazom \verb|\label{oznaka}|. Seveda morajo biti oznake
-različnih trditev različne. Enako označujemo tudi druga okolja oziroma enote
-besedila.
-
-\begin{izrek}\label{izr:enakomerno}
-Zvezna funkcija na zaprtem intervalu je enakomerno zvezna.
-\end{izrek}
-
-\begin{dokaz}
-Na začetku dokaza, če je to le mogoče in smiselno, razložite idejo dokaza.
-
-Dokazovali bomo s protislovjem. Pomagali si bomo z definicijo zveznosti in s
-kompaktnostjo intervala.  Izberimo $\varepsilon>0$. Če $f$ ni enakomerno
-zvezna, potem za vsak $\delta>0$ obstajata $x, y$, ki zadoščata
-\begin{equation}\label{eq:razlika}
-  |x-y|<\delta\quad \text{in}\quad |f(x)-f(y)| \ge \varepsilon. \qedhere
-\end{equation}
-\end{dokaz}
-
-V zgornjem primeru smo kvadratek za konec dokaza postavili v zadnjo vrstico
-besedila, ki je vrstična formula, s pomočjo ukaza \verb|\qedhere|.  Ta ukaz
-ustrezno deluje znotraj okolij \emph{equation, align*} in podobnih, ne pa
-znotraj \verb|$$ ... $$|.
-
-Oglejmo si še enkrat neenačbi~\eqref{eq:razlika}. Na formule se sklicujemo z
-ukazom \verb|\eqref{oznaka}|, ki postavi zaporedno številko enačbe
-v oklepaje, na trditve in ostale enote pa z ukazom \verb|\ref{oznaka}|. Črni
-pravokotnik ob robu strani označuje predolgo vrstico, kjer \LaTeX ni uspel
-pravilno postaviti besedila, zato mu morate pomagati, npr.\ tako, da stavek
-nekoliko preoblikujete, sami razdelite nedeljivo enoto (npr. razdelite
-matematično formulo na dva dela) ali pa ponudite možnosti za deljenje težavne
-besede s pomočjo znakov\verb|\-|, ki jih postavite na mesto, kjer se besedo sme
-deliti, npr.\  \verb|te\-žav\-nost\-ni\-ca|. Zgoraj bi tako lahko zapisali:
-
-Oglejmo si še enkrat neenačbi~\eqref{eq:razlika}. Za sklicevanje na označene
-enote besedila imamo na razpolago dva ukaza; na formule se sklicujemo z ukazom
-\verb|\eqref{oznaka}|, \dots
-
-V predzadnjem odstavku je v oklepaju za okrajšavo npr.\ nastal predolg
-presledek sredi stavka, saj je \LaTeX zaradi pike sklepal, da je na tem mestu
-stavka konec. Tak predolg presledek preprečimo tako, da za piko sredi stavka
-postavimo poševnico in za njo presledek, torej \verb|\ |.\\
-
-Če dokaz trditve ne sledi neposredno formulaciji trditve, moramo povedati, kaj
-bomo dokazovali. To naredimo tako, da ob ukazu za okolje dokaz dodamo neobvezni
-parameter,  v katerem napišemo besedilo, ki se bo izpisalo namesto besede
-\emph{Dokaz}, npr.\ \verb|\begin{Dokaz}[Dokaz izreka \ref{izr:enakomerno}]|.
-
-\begin{dokaz}[Dokaz izreka \ref{izr:enakomerno}]
-  Dokazovanja te trditve se lahko lotimo tudi takole \ldots
-\end{dokaz}
-
-\subsection{Naslov morebitnega (pod)razdelka} Besedilo naj se nadaljuje v vrstici naslova, torej za ukazom \verb|\subsection{}| ne smete izpustiti prazne vrstice.
-
-Podobno kot lahko spremenimo ime dokaza, lahko dodamo komentar v ime trditve,
-torej s pomočjo neobveznega parametra; prvega od spodnjih izpisov dosežemo z
-ukazom \verb|\begin{posledica}[izrek o vmesni vrednosti]|. Če želimo v
-parametru navesti vir, pri katerem bomo navedli podatek o tem, kje v viru to
-trditev najdemo, pa uporabimo ukaz
-\verb|\begin{posledica}[\protect{\cite[izrek 3.14]{glob}}]|. Seveda lahko obe
-možnosti kombiniramo.
-
-
-\begin{posledica}[izrek o vmesni vrednosti]
-  Naj bo $f$ zvezna in \ldots
-\end{posledica}
-
-Ali pa
-
-\begin{posledica}[izrek o vmesni vrednosti \protect{\cite[izrek 3.14]{glob}}]
-  Naj bo $f$ zvezna in \ldots
-\end{posledica}
-
-Podobno lahko napovemo tudi vsebino primera.
-
-\begin{primer}[nezvezna funkcija nima nujno lastnosti povprečne vrednosti]
-  Naj bo $f \colon \R \to \R$ dana s predpisom \dots
-\end{primer}
-
-\subsection{Pisanje algoritmov}
-Za pisanje algoritmov sta na voljo okolji \texttt{algorithm} in
-\texttt{algorithmic} iz paketov \texttt{algorithm} in \texttt{algorithmix}, ki
-sodelujeta podobno kot \texttt{table} in \texttt{tabular}. Algoritmi plavajo
-med tekstom, enako kot slike in tabele, nanje se lahko tudi sklicujemo, kot
-prikazano v izvorni kodi in v algoritmu~\ref{alg:metoda}. Sklicujemo se lahko
-tudi na pomembne vrstice, npr.\ na vrstico~\ref{alg:pomembna-vrstica}, ki
-predstavlja glavni del algoritma. Za primer pisanja algoritma se posvetujte s
-primerom v tem dokumentu, za bolj napredne primere uporabe, kot na primer
-razbijanje algoritma na več kosov, pa z (precej razumljivo) uradno
-dokumentacijo\footnote{\url{http://tug.ctan.org/macros/latex/contrib/algorithmicx/algorithmicx.pdf}}.
-Če želite vključiti izvorno kodo nekega programa, priporočamo paket
-\texttt{minted}\footnote{\url{https://github.com/gpoore/minted}}.
-
-\algnewcommand\algorithmicto{\textbf{to}}
-\algnewcommand\algorithmicin{\textbf{in}}
-\algnewcommand\algorithmicforeach{\textbf{for each}}
-\algrenewtext{For}[3]{\algorithmicfor\ #1 $\gets$ #2\ \algorithmicto\ #3\ \algorithmicdo}
-\algdef{S}[FOR]{ForEach}[2]{\algorithmicforeach\ #1\ \algorithmicin\ #2\ \algorithmicdo}
-
-\begin{algorithm}[ht]
-  \caption{Opis, ki ima enako funkcionalnost kot opis pod sliko.}
-  \label{alg:metoda}
-  \raggedright
-  \textbf{Vhod:} Števili $n, m \in \N, n > m$. \\
-  \textbf{Izhod:} Decimalno število $x$, ki aproksimira rešitev enačbe $n x = m$.
-  \begin{algorithmic}[1]
-    \Function{reši}{$n$, $m$} \Comment{Vsi vhodni parametri morajo biti opisani.}
-    \State $a \gets [\,]$ \Comment{Spremenljivka $a$ naj postane prazna kopica.}
-    \For{$i$}{$1$}{$n$}
-      \If{$i \operatorname{mod} 7 = 5$}
-        \State \Call{heapop}{$a$}
-      \ElsIf{$i < 5$}
-      \State \Call{heappush}{$a, \frac{i+12}{7} + \pi$} \Comment{Lahko uporabljamo matematiko.}
-      \Else
-        \State \Call{heappush}{$a, i$}
-      \EndIf
-    \EndFor
-    \Statex  \Comment{Prazna vrstica}
-    \State $x \gets 0$  \Comment{To je primer komentarja.}
-    \ForEach{e}{a}
-      \State $x \gets 1 + \sqrt[e]{x}$
-    \EndFor
-    \While{$|x| > \varepsilon$}
-      \State $x \gets x / 2$
-    \EndWhile
-    \State $x \gets m / n$ \label{alg:pomembna-vrstica}
-    \State \Return $x$  \Comment{Vsi izhodni parametri morajo biti opisani nad algoritmom.}
-    \EndFunction
-  \end{algorithmic}
-\end{algorithm}
-
-\section{Konec dela}
-
-Na konec dela sodita angleško-slovenski slovarček strokovnih izrazov in seznam
-uporabljene literature, morebitne priloge (programska koda, daljša ponovitev
-dela snovi, ki je bil obravnavan med študijem \dots) pa neposredno pred ti
-enoti. Slovar naj vsebuje vse pojme, ki ste jih spoznali ob pripravi dela, pa
-tudi že znane pojme, ki ste jih spoznali pri izbirnih predmetih. Najprej
-navedite angleški pojem (ti naj bodo urejeni po abecedi) in potem ustrezni
-slovenski prevod; zaželeno je, da temu sledi tudi opis pojma, lahko komentar
-ali pojasnilo. Slovarska gesla navajajte z ukazom \verb|\geslo{}{}|, npr.\
-\verb|\geslo{continuous}{zvezen}|.
-
-Pri navajanju literature si pomagajte s spodnjimi primeri; najprej je opisano
-pravilo za vsak tip vira, nato so podani primeri. Člen literature napišete z
-ukazom \verb|\bibitem{oznaka} podatki o viru|, kjer mora \emph{ozmaka} enolično
-določati vir.  Posebej opozarjam, da spletni viri uporabljajo paket url, ki je
-vključen v~.cls datoteki. Polje ``ogled'' pri spletnih virih je obvezno; če je
-kak podatek neznan, ustrezno ``polje'' seveda izpustimo. Literaturo je potrebno
-urediti po abecednem vrstnem redu; najprej navedemo vse vire z znanimi avtorji
-(tiskane in spletne) po abecednem redu avtorjev (po priimkih, nato imenih),
-nato pa spletne vire brez avtorjev, urejene po naslovih strani. Če isti vir
-navajamo v dveh oblikah, kot tiskani in spletni vir, najprej navedemo tiskani
-vir, nato pa še podatek o tem, kje je dostopen v elektronski obliki.
 
 \end{document}
 
