@@ -100,7 +100,7 @@
   \def\@thesistype{Master's thesis}
 }{
   \def\@stopnja{1. stopnja}
-  \def\@tipdela{Delo diplomskega seminarja}
+  \def\@tipdela{Delo finančnega praktikuma}
   \def\@cycle{1st cycle}
   \def\@thesistype{Diploma seminar work}
 }
@@ -169,8 +169,6 @@
 \newcommand{\povzetek}{\@definerequiredfield{@povzetek}}
 \renewcommand{\abstract}{\@definerequiredfield{@abstract}}
 \newcommand{\klasifikacija}{\@definerequiredfield{@klasifikacija}}
-\newcommand{\kljucnebesede}{\@definerequiredfield{@kljucnebesede}}
-\newcommand{\keywords}{\@definerequiredfield{@keywords}}
 \newcommand{\slovar}{\@definefield{@slovar}}
 \newcommand{\literatura}{\@definefield{@literatura}}
 
@@ -181,7 +179,6 @@
 \@ifthen{\boolean{@trst}}{
   \newcommand{\titolo}{\@definerequiredfield{@it@title}}
   \newcommand{\sommario}{\@definerequiredfield{@it@abstract}}
-  \newcommand{\parolechiave}{\@definerequiredfield{@it@keywords}}
   \newcommand{\sintesiestesa}{\@definerequiredfield{@it@razsirjenipovzetek}}
 }
 
@@ -218,13 +215,11 @@
   \addtostream{xmpdatafile}{%
   \protect\Title{\@title}
   \protect\Author{\@avtor}
-  \protect\Keywords{\@keywords}
   \protect\Subject{\@thesistype, \@programme, \@klasifikacija}
 }}{
   \addtostream{xmpdatafile}{%
   \protect\Title{\@naslov}
   \protect\Author{\@avtor}
-  \protect\Keywords{\@kljucnebesede}
   \protect\Subject{\@tipdela, \@program, \@klasifikacija}
 }}
 \closeoutputstream{xmpdatafile}
@@ -444,6 +439,7 @@
 \newtheorem{aksiom}{Aksiom}
 \newtheorem{definicija}{Definicija}[section]
 \newtheorem{opomba}[definicija]{Opomba}
+\newtheorem{hipoteza}[definicija]{Hipoteza}
 \newtheorem{primer*}[definicija]{Primer}
 \newenvironment{primer}[1][]{
   \begin{primer*}[#1]\renewcommand*{\qedsymbol}{$\diamondsuit$}\pushQED{\qed}
@@ -519,12 +515,7 @@
   \@frontpages@sl@naslovnica
   \@frontpages@sl@zahvala
   \@frontpages@common@toc
-
-  \pdfbookmark[1]{Povzetek}{povzetek}
-  \@frontpages@sl@povzetek
-  \@frontpages@en@abstract
-  \@frontpages@sl@kljucnebesede
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@en{
   \@frontpages@en@frontpage
@@ -535,8 +526,7 @@
   \pdfbookmark[1]{Abstract}{abstract}
   \@frontpages@en@abstract
   \@frontpages@sl@povzetek
-  \@frontpages@en@keywords
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@trst{
   \@frontpages@trst@en@frontpage
@@ -548,15 +538,14 @@
   \@frontpages@en@abstract
   \@frontpages@trst@abstract
   \@frontpages@sl@povzetek
-  \@frontpages@trst@keywords
-  \cleardoublepage
+  \clearpage
 }
 
 \def\@frontpages@common@toc{
   \pdfbookmark[1]{\contentsname}{kazalo-vsebine}
   \tableofcontents
   \vfill
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@sl@naslovnica{
   \thispagestyle{empty}
@@ -581,7 +570,7 @@
 
   \noindent{\large
   Ljubljana, \@letnica}
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@en@frontpage{
   \thispagestyle{empty}
@@ -604,7 +593,7 @@
 
   \noindent{\large
   Ljubljana, \@letnica}
-  \cleardoublepage
+  \clearpage
 }
 \newcommand{\dvastolpca}[3][0.45]{
   \hfill
@@ -652,7 +641,7 @@
   \begin{center}\large
     Ljubljana, \@letnica
   \end{center}
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@trst@itslo@frontpage{
   \thispagestyle{empty}
@@ -695,7 +684,7 @@
   \begin{center}\large
     Ljubljana, \@letnica
   \end{center}
-  \cleardoublepage
+  \clearpage
 }
 \def\@frontpages@sl@zahvala{
   \ifdefined\@zahvala
@@ -703,7 +692,7 @@
     \section*{Zahvala}
     \@zahvala
     \vfill
-    \cleardoublepage
+    \clearpage
   \fi
 }
 \def\@frontpages@en@acknowledgements{
@@ -712,7 +701,7 @@
     \section*{Acknowledgements}
     \@zahvala
     \vfill
-    \cleardoublepage
+    \clearpage
   \fi
 }
 \def\@frontpages@sl@povzetek{
@@ -740,28 +729,6 @@
   \@it@abstract
   \end{otherlanguage}
   \vfill
-}
-\def\@frontpages@sl@kljucnebesede{
-  \noindent
-  \textbf{Math. Subj. Class. (2020):} \@klasifikacija \\[1mm]
-  \def\sep{, }% Pri izpisu ključne besede ločimo z vejico.
-  \textbf{Ključne besede:} \@kljucnebesede \\[1mm]
-  \textbf{Keywords:} \@keywords
-}
-\def\@frontpages@en@keywords{
-  \noindent
-  \textbf{Math. Subj. Class. (2020):} \@klasifikacija \\[1mm]
-  \def\sep{, }% Pri izpisu ključne besede ločimo z vejico.
-  \textbf{Keywords:} \@keywords \\[1mm]
-  \textbf{Ključne besede:} \@kljucnebesede
-}
-\def\@frontpages@trst@keywords{
-  \noindent
-  \textbf{Math. Subj. Class. (2020):} \@klasifikacija \\[1mm]
-  \def\sep{, }% Pri izpisu ključne besede ločimo z vejico.
-  \textbf{Keywords:} \@keywords \\[1mm]
-  \textbf{Parole chiave:} \@it@keywords \\[1mm]
-  \textbf{Ključne besede:} \@kljucnebesede
 }
 
 \AfterEndPreamble{%
@@ -801,7 +768,7 @@
   \let\section\subsection
   \let\subsection\subsubsection
 
-  \cleardoublepage
+  \clearpage
   \begin{otherlanguage}{#1}
     \phantomsection % potrebno za pravilno številčenje strani v kazalih
     \addcontentsline{toc}{section}{#2} % doda razdelek v kazalo in metapodatke
@@ -820,13 +787,8 @@
 
 
 \AtEndDocument{%
-\ifdefined\@slovar
-\pdfbookmark[1]{Slovar strokovnih izrazov}{slovar}
-\section*{Slovar strokovnih izrazov}
-\@slovar
-\fi
 \ifdefined\@literatura
-\cleardoublepage
+\clearpage
 \phantomsection
 \@sloeng
   {\addcontentsline{toc}{section}{Literatura}}
@@ -845,7 +807,7 @@
     \popQED\end{esempio*}
   }
 
-  \cleardoublepage
+  \clearpage
   \@make@razsirjenipovzetek{italian}{Sintesi estesa}{\@it@razsirjenipovzetek}
 }
 \@ifthen{\boolean{@anglescina}}{
@@ -855,13 +817,13 @@
   \theoremstyle{definition}
   \newtheorem{definicija}{Definicija}[subsection]
 
-  \cleardoublepage
+  \clearpage
   \@make@razsirjenipovzetek{slovene}{Razširjeni povzetek}{\@razsirjenipovzetek}
 }
 
 % only print the index (and clear the page) if the \index command has been used
 \@ifthen{\boolean{@index}}{
-  \cleardoublepage
+  \clearpage
   \printindex
 }
 }
