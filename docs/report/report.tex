@@ -55,6 +55,7 @@ vsebine.}
 \usepackage{algpseudocode}  % za psevdokodo
 \usepackage{algorithm}      % za algoritme
 \usepackage{graphicx}       % za slike
+\usepackage{subcaption}
 \floatname{algorithm}{Algoritem}
 \renewcommand{\listalgorithmname}{Kazalo algoritmov}
 
@@ -315,49 +316,49 @@ vrednosti tabele, ki so jo podali \textcite{saber2025}. \newline\newline
 \begin{tabular}{|c|c||c|c||c|c||c|c||c|c||c|c||c|c|}
 \hline
 $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$\\ \hline
-150 & 58 & 151 & 59 & 152 & 59 & 153 & 60 & 154 & 60 & 155 & 60 & 156 & 61\\ \hline
-157 & 61 & 158 & 62 & 159 & 62 & 160 & 62 & 161 & 63 & 162 & 63 & 163 & 63\\ \hline
-164 & 64 & 165 & 64 & 166 & 65 & 167 & 65 & 168 & 65 & 169 & 66 & 170 & 66\\ \hline
-171 & 67 & 172 & 67 & 173 & 67 & 174 & 68 & 175 & 68 & 176 & 69 & 177 & 69\\ \hline
-178 & 69 & 179 & 70 & 180 & 70 & 181 & 70 & 182 & 71 & 183 & 71 & 184 & 72\\ \hline
-185 & 72 & 186 & 72 & 187 & 73 & 188 & 73 & 189 & 74 & 190 & 74 & 191 & 74\\ \hline
-192 & 75 & 193 & 75 & 194 & 76 & 195 & 76 & 196 & 76 & 197 & 77 & 198 & 77\\ \hline
-199 & 78 & 200 & 78 & 201 & 78 & 202 & 79 & 203 & 79 & 204 & 79 & 205 & 80\\ \hline
-206 & 80 & 207 & 81 & 208 & 81 & 209 & 81 & 210 & 82 & 211 & 82 & 212 & 83\\ \hline
-213 & 83 & 214 & 83 & 215 & 84 & 216 & 84 & 217 & 85 & 218 & 85 & 219 & 85\\ \hline
-220 & 86 & 221 & 86 & 222 & 86 & 223 & 87 & 224 & 87 & 225 & 88 & 226 & 88\\ \hline
-227 & 88 & 228 & 89 & 229 & 89 & 230 & 90 & 231 & 90 & 232 & 90 & 233 & 91\\ \hline
-234 & 91 & 235 & 92 & 236 & 92 & 237 & 92 & 238 & 93 & 239 & 93 & 240 & 94\\ \hline
-241 & 94 & 242 & 94 & 243 & 95 & 244 & 95 & 245 & 95 & 246 & 96 & 247 & 96\\ \hline
-248 & 97 & 249 & 97 & 250 & 97 & 251 & 98 & 252 & 98 & 253 & 99 & 254 & 99\\ \hline
-255 & 99 & 256 & 100 & 257 & 100 & 258 & 101 & 259 & 101 & 260 & 101 & 261 & 102\\ \hline
-262 & 102 & 263 & 102 & 264 & 103 & 265 & 103 & 266 & 104 & 267 & 104 & 268 & 104\\ \hline
-269 & 105 & 270 & 105 & 271 & 106 & 272 & 106 & 273 & 106 & 274 & 107 & 275 & 107\\ \hline
-276 & 108 & 277 & 108 & 278 & 108 & 279 & 109 & 280 & 109 & 281 & 110 & 282 & 110\\ \hline
-283 & 110 & 284 & 111 & 285 & 111 & 286 & 111 & 287 & 112 & 288 & 112 & 289 & 113\\ \hline
-290 & 113 & 291 & 113 & 292 & 114 & 293 & 114 & 294 & 115 & 295 & 115 & 296 & 115\\ \hline
-297 & 116 & 298 & 116 & 299 & 117 & 300 & 117 & 301 & 117 & 302 & 118 & 303 & 118\\ \hline
-304 & 119 & 305 & 119 & 306 & 119 & 307 & 120 & 308 & 120 & 309 & 120 & 310 & 121\\ \hline
-311 & 121 & 312 & 122 & 313 & 122 & 314 & 122 & 315 & 123 & 316 & 123 & 317 & 124\\ \hline
-318 & 124 & 319 & 124 & 320 & 125 & 321 & 125 & 322 & 126 & 323 & 126 & 324 & 126\\ \hline
-325 & 127 & 326 & 127 & 327 & 127 & 328 & 128 & 329 & 128 & 330 & 129 & 331 & 129\\ \hline
-332 & 129 & 333 & 130 & 334 & 130 & 335 & 131 & 336 & 131 & 337 & 131 & 338 & 132\\ \hline
-339 & 132 & 340 & 133 & 341 & 133 & 342 & 133 & 343 & 134 & 344 & 134 & 345 & 135\\ \hline
-346 & 135 & 347 & 135 & 348 & 136 & 349 & 136 & 350 & 136 & 351 & 137 & 352 & 137\\ \hline
-353 & 138 & 354 & 138 & 355 & 138 & 356 & 139 & 357 & 139 & 358 & 140 & 359 & 140\\ \hline
-360 & 140 & 361 & 141 & 362 & 141 & 363 & 142 & 364 & 142 & 365 & 142 & 366 & 143\\ \hline
-367 & 143 & 368 & 143 & 369 & 144 & 370 & 144 & 371 & 145 & 372 & 145 & 373 & 145\\ \hline
-374 & 146 & 375 & 146 & 376 & 147 & 377 & 147 & 378 & 147 & 379 & 148 & 380 & 148\\ \hline
-381 & 149 & 382 & 149 & 383 & 149 & 384 & 150 & 385 & 150 & 386 & 151 & 387 & 151\\ \hline
-388 & 151 & 389 & 152 & 390 & 152 & 391 & 152 & 392 & 153 & 393 & 153 & 394 & 154\\ \hline
-395 & 154 & 396 & 154 & 397 & 155 & 398 & 155 & 399 & 156 & 400 & 156 & 401 & 156\\ \hline
-402 & 157 & 403 & 157 & 404 & 158 & 405 & 158 & 406 & 158 & 407 & 159 & 408 & 159\\ \hline
-409 & 159 & 410 & 160 & 411 & 160 & 412 & 161 & 413 & 161 & 414 & 161 & 415 & 162\\ \hline
-416 & 162 & 417 & 163 & 418 & 163 & 419 & 163 & 420 & 164 & 421 & 164 & 422 & 165\\ \hline
-423 & 165 & 424 & 165 & 425 & 166 & 426 & 166 & 427 & 167 & 428 & 167 & 429 & 167\\ \hline
-430 & 168 & 431 & 168 & 432 & 168 & 433 & 169 & 434 & 169 & 435 & 170 & 436 & 170\\ \hline
-437 & 170 & 438 & 171 & 439 & 171 & 440 & 172 & 441 & 172 & 442 & 172 & 443 & 173\\ \hline
-444 & 173 & 445 & 174 & 446 & 174 & 447 & 174 & 448 & 175 & 449 & 175 & 450 & \textbf{175,176}\\ \hline
+150 & 58 & 193 & 75 & 236 & 92 & 279 & 109 & 322 & 126 & 365 & 142 & 408 & 159\\ \hline
+151 & 59 & 194 & 76 & 237 & 92 & 280 & 109 & 323 & 126 & 366 & 143 & 409 & 159\\ \hline
+152 & 59 & 195 & 76 & 238 & 93 & 281 & 110 & 324 & 126 & 367 & 143 & 410 & 160\\ \hline
+153 & 60 & 196 & 76 & 239 & 93 & 282 & 110 & 325 & 127 & 368 & 143 & 411 & 160\\ \hline
+154 & 60 & 197 & 77 & 240 & 94 & 283 & 110 & 326 & 127 & 369 & 144 & 412 & 161\\ \hline
+155 & 60 & 198 & 77 & 241 & 94 & 284 & 111 & 327 & 127 & 370 & 144 & 413 & 161\\ \hline
+156 & 61 & 199 & 78 & 242 & 94 & 285 & 111 & 328 & 128 & 371 & 145 & 414 & 161\\ \hline
+157 & 61 & 200 & 78 & 243 & 95 & 286 & 111 & 329 & 128 & 372 & 145 & 415 & 162\\ \hline
+158 & 62 & 201 & 78 & 244 & 95 & 287 & 112 & 330 & 129 & 373 & 145 & 416 & 162\\ \hline
+159 & 62 & 202 & 79 & 245 & 95 & 288 & 112 & 331 & 129 & 374 & 146 & 417 & 163\\ \hline
+160 & 62 & 203 & 79 & 246 & 96 & 289 & 113 & 332 & 129 & 375 & 146 & 418 & 163\\ \hline
+161 & 63 & 204 & 79 & 247 & 96 & 290 & 113 & 333 & 130 & 376 & 147 & 419 & 163\\ \hline
+162 & 63 & 205 & 80 & 248 & 97 & 291 & 113 & 334 & 130 & 377 & 147 & 420 & 164\\ \hline
+163 & 63 & 206 & 80 & 249 & 97 & 292 & 114 & 335 & 131 & 378 & 147 & 421 & 164\\ \hline
+164 & 64 & 207 & 81 & 250 & 97 & 293 & 114 & 336 & 131 & 379 & 148 & 422 & 165\\ \hline
+165 & 64 & 208 & 81 & 251 & 98 & 294 & 115 & 337 & 131 & 380 & 148 & 423 & 165\\ \hline
+166 & 65 & 209 & 81 & 252 & 98 & 295 & 115 & 338 & 132 & 381 & 149 & 424 & 165\\ \hline
+167 & 65 & 210 & 82 & 253 & 99 & 296 & 115 & 339 & 132 & 382 & 149 & 425 & 166\\ \hline
+168 & 65 & 211 & 82 & 254 & 99 & 297 & 116 & 340 & 133 & 383 & 149 & 426 & 166\\ \hline
+169 & 66 & 212 & 83 & 255 & 99 & 298 & 116 & 341 & 133 & 384 & 150 & 427 & 167\\ \hline
+170 & 66 & 213 & 83 & 256 & 100 & 299 & 117 & 342 & 133 & 385 & 150 & 428 & 167\\ \hline
+171 & 67 & 214 & 83 & 257 & 100 & 300 & 117 & 343 & 134 & 386 & 151 & 429 & 167\\ \hline
+172 & 67 & 215 & 84 & 258 & 101 & 301 & 117 & 344 & 134 & 387 & 151 & 430 & 168\\ \hline
+173 & 67 & 216 & 84 & 259 & 101 & 302 & 118 & 345 & 135 & 388 & 151 & 431 & 168\\ \hline
+174 & 68 & 217 & 85 & 260 & 101 & 303 & 118 & 346 & 135 & 389 & 152 & 432 & 168\\ \hline
+175 & 68 & 218 & 85 & 261 & 102 & 304 & 119 & 347 & 135 & 390 & 152 & 433 & 169\\ \hline
+176 & 69 & 219 & 85 & 262 & 102 & 305 & 119 & 348 & 136 & 391 & 152 & 434 & 169\\ \hline
+177 & 69 & 220 & 86 & 263 & 102 & 306 & 119 & 349 & 136 & 392 & 153 & 435 & 170\\ \hline
+178 & 69 & 221 & 86 & 264 & 103 & 307 & 120 & 350 & 136 & 393 & 153 & 436 & 170\\ \hline
+179 & 70 & 222 & 86 & 265 & 103 & 308 & 120 & 351 & 137 & 394 & 154 & 437 & 170\\ \hline
+180 & 70 & 223 & 87 & 266 & 104 & 309 & 120 & 352 & 137 & 395 & 154 & 438 & 171\\ \hline
+181 & 70 & 224 & 87 & 267 & 104 & 310 & 121 & 353 & 138 & 396 & 154 & 439 & 171\\ \hline
+182 & 71 & 225 & 88 & 268 & 104 & 311 & 121 & 354 & 138 & 397 & 155 & 440 & 172\\ \hline
+183 & 71 & 226 & 88 & 269 & 105 & 312 & 122 & 355 & 138 & 398 & 155 & 441 & 172\\ \hline
+184 & 72 & 227 & 88 & 270 & 105 & 313 & 122 & 356 & 139 & 399 & 156 & 442 & 172\\ \hline
+185 & 72 & 228 & 89 & 271 & 106 & 314 & 122 & 357 & 139 & 400 & 156 & 443 & 173\\ \hline
+186 & 72 & 229 & 89 & 272 & 106 & 315 & 123 & 358 & 140 & 401 & 156 & 444 & 173\\ \hline
+187 & 73 & 230 & 90 & 273 & 106 & 316 & 123 & 359 & 140 & 402 & 157 & 445 & 174\\ \hline
+188 & 73 & 231 & 90 & 274 & 107 & 317 & 124 & 360 & 140 & 403 & 157 & 446 & 174\\ \hline
+189 & 74 & 232 & 90 & 275 & 107 & 318 & 124 & 361 & 141 & 404 & 158 & 447 & 174\\ \hline
+190 & 74 & 233 & 91 & 276 & 108 & 319 & 124 & 362 & 141 & 405 & 158 & 448 & 175\\ \hline
+191 & 74 & 234 & 91 & 277 & 108 & 320 & 125 & 363 & 142 & 406 & 158 & 449 & 175\\ \hline
+192 & 75 & 235 & 92 & 278 & 108 & 321 & 125 & 364 & 142 & 407 & 159 & 450 & \textbf{175,176}\\ \hline
 \end{tabular}
 \end{center}
 }
@@ -418,32 +419,165 @@ $f_{uv}$ pa modelirajmo povezanost grafa.
 &\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
 \end{align}
 
-Najdeni grafi so sledeči, pri čemer pa je vredno omeniti, da prikazani grafi za dan red $n$ ter 
-ciklomatično število $\nu$ niso unikatni. 
+Najdeni grafi so sledečih oblik, pri čemer pa je vredno omeniti, da grafi za dan red $n$ ter 
+ciklomatično število $\nu$ niso nujno unikatni. 
 
-\begin{hipoteza}
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/conjecture_min_5_2.png}
+        \caption{Graf reda 5 z ciklomatičnem številom 2. Primer, ki ga razreši prva točka hipoteze~\ref{hip:min}}
+        \label{fig:5_2}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/conjecture_min_17_5.png}
+        \caption{Graf reda 17 z ciklomatičnem številom 5. Primer, ki ga razreši tretja točka hipoteze~\ref{hip:min}}
+        \label{fig:17_5}
+    \end{subfigure}
+    \caption{Grafa, ki glede na svoje število vozlišč ter ciklomatično število dosežeta minimum DKZI vrednosti.}
+    \label{fig:hip_min_zgled}
+\end{figure}
+
+\begin{hipoteza}\label{hip:min}
   Z $G_{n, \nu}$ označimo graf reda $n$, ki za dano ciklomatično število $\nu$ doseže
   minimalno vrednost DKZI, tedaj velja:
   \begin{enumerate}
-    \item $\forall n\geq 7:\ \cM(G_{n, 2}) = 16$
-    \item $\forall \nu\geq 3, \geq 2\nu:\ \cM(G_{2\nu - 1, \nu}) = 10$.
+    \item $\cM(G_{4, 2}) = 20 \land \cM(G_{5, 2}) = 18 \land \quad \forall n\geq 6:\ \cM(G_{n, 2}) = 16$
+    \item $\forall \nu\geq 3:\ \cM(G_{2\nu - 1, \nu}) = 10$.
     \item $\forall \nu\geq 3, \forall n\geq 2\nu:\ \cM(G_{n, \nu}) = 8$.
   \end{enumerate}
 \end{hipoteza}
 
 \subsection{Problem maksimuma}
 
+\begin{opomba}
+  Ciklomatično število grafa $K_k + \KC_{n-k}$ je enako 
+  \[\nu = k (n-k) + k (k-1) / 2 - n + 1.\] To preprosto sledi iz števila 
+  njegovih povezav. 
+\end{opomba}
 
-\begin{hipoteza}
+\begin{hipoteza}\label{hip:max}
   Z $G_{n, \nu}$ označimo graf reda $n$, ki za dano ciklomatično število $\nu$ doseže maksimalno 
   vrednost DKZI, tedaj velja:
   \begin{enumerate}
     \item Naj bo $Z_n$ zvezda, $\KC_n$ prazen graf ter $K_1$ enovozliščen graf. Za 
     poljuben $\nu$ in za vsak $n \geq \nu + 2$ velja 
-    $G_{n, \nu} = (Z_{\nu + 1} \cup \KC_{n - \nu - 2} + K_1)$ in 
+    $G_{n, \nu} = (Z_{\nu} \cup \KC_{n - \nu - 2}) + K_1$ in 
     $\cM(G_{n, \nu}) = n(n-1)(n-2) + \nu(\nu^2 + \nu - 8)$.
+    \item Naj bo $\lceil (3 + \sqrt(1 + 8\nu))/2 \rceil \leq n < \nu + 2$. 
+    Naj bo $(a, b)$ prvi celoštevilski par, ki zadošča enačbi $b = (1+a)(4+a-2n) / 2 + \nu$,
+    in pogojema $0 \leq a \leq n - 3$ ter $1 \leq b \leq n - 1 - a$. Tedaj velja:
+    \begin{align*}
+      \cM(G_{n, \nu}) &= ((n-1)^2 - (2+a+b)^2) \ (2 + a) + \\
+                      &+ ((2+a+b)^2 - (3+a)^2) \ b \\
+                      &+ ((n-1)^2 - (3+a)^2) \ 2 b \\
+                      &+ ((n-1)^2 - (3+a)) \ a b \\ 
+                      &+ ((n-1)^2 - (2+a)^2) \ 2 (n-3-a-b) \\
+                      &+ ((n-1)^2 - (2+a)^2) \ a (n-3-a-b)
+    \end{align*}
   \end{enumerate}
 \end{hipoteza}
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/conjecture_max_14_9.png}
+        \caption{Graf reda 14 z ciklomatičnem številom 9. Primer, ki ga razreši prva točka hipoteze~\ref{hip:max}}
+        \label{fig:14_9}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/conjecture_max_8_9.png}
+        \caption{Graf reda 8 z ciklomatičnem številom 9. Primer, ki ga razreši druga točka hipoteze~\ref{hip:max}}
+        \label{fig:8_9}
+    \end{subfigure}
+    \caption{Grafa, ki glede na svoje število vozlišč ter ciklomatično število dosežeta maksimum DKZI vrednosti.}
+    \label{fig:hip_max_zgled}
+\end{figure}
+
+\begin{opomba}
+  Hipoteza~\ref{hip:max} v celoti razreši problem maksimalnega DKZI pri grafih 
+  z danim redom $n$ ter ciklomatičnem številom $\nu$.
+\end{opomba}
+Ob predpostavki, da hipoteza velja, prikažimo tabelo maksimalnih DKZI vrednosti za dana 
+parametra $n$ ter $\nu$. Na njej pa odebeljeno označimo tiste vrednosti DKZI, ki 
+nam jih narekuje izrek~\ref{iz:funkcija_k}. Vidimo, da se naša hipoteza z njimi ujema
+povsod koder se lahko. Prav tako se hipoteza ujema z vsemi rezultati, ki jih 
+prineseta metodi (MILP) in (SA).
+{\scriptsize
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c||c|c|c||c|c|c|}
+\hline
+$n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ & $\cM(G_{n, \nu})$\\ \hline
+3 & 1 & 0 & 6 & 5 & 148 & 14 & 9 & 2922 & 14 & 14 & 3930\\ \hline
+4 & 1 & 18 & 7 & 5 & 320 & 15 & 9 & 3468 & 15 & 14 & 4972\\ \hline
+5 & 1 & 54 & 8 & 5 & 446 & 16 & 9 & 4098 & 16 & 14 & 6188\\ \hline
+6 & 1 & 114 & 9 & 5 & 614 & 17 & 9 & 4818 & 17 & 14 & 6908\\ \hline
+7 & 1 & 204 & 10 & 5 & 830 & 18 & 9 & 5634 & 18 & 14 & 7724\\ \hline
+8 & 1 & 330 & 11 & 5 & 1100 & 6 & 10 & 0 & 7 & 15 & 0\\ \hline
+9 & 1 & 498 & 12 & 5 & 1430 & 7 & 10 & 282 & 8 & 15 & 528\\ \hline
+10 & 1 & 714 & 13 & 5 & 1826 & 8 & 10 & 544 & 9 & 15 & 918\\ \hline
+11 & 1 & 984 & 14 & 5 & 2294 & 9 & 10 & 816 & 10 & 15 & 1512\\ \hline
+12 & 1 & 1314 & 15 & 5 & 2840 & 10 & 10 & 1202 & 11 & 15 & 1878\\ \hline
+13 & 1 & 1710 & 16 & 5 & 3470 & 11 & 10 & 1708 & 12 & 15 & 2400\\ \hline
+14 & 1 & 2178 & 17 & 5 & 4190 & 12 & 10 & 2340 & 13 & 15 & 3084\\ \hline
+15 & 1 & 2724 & 18 & 5 & 5006 & 13 & 10 & 2736 & 14 & 15 & 3936\\ \hline
+16 & 1 & 3354 & 5 & 6 & 0 & 14 & 10 & 3204 & 15 & 15 & 4962\\ \hline
+17 & 1 & 4074 & 6 & 6 & 138 & 15 & 10 & 3750 & 16 & 15 & 6168\\ \hline
+18 & 1 & 4890 & 7 & 6 & 300 & 16 & 10 & 4380 & 17 & 15 & 7560\\ \hline
+4 & 2 & 20 & 8 & 6 & 540 & 17 & 10 & 5100 & 18 & 15 & 8376\\ \hline
+5 & 2 & 56 & 9 & 6 & 708 & 18 & 10 & 5916 & 8 & 16 & 456\\ \hline
+6 & 2 & 116 & 10 & 6 & 924 & 7 & 11 & 252 & 9 & 16 & 906\\ \hline
+7 & 2 & 206 & 11 & 6 & 1194 & 8 & 11 & \textbf{600} & 10 & 16 & 1470\\ \hline
+8 & 2 & 332 & 12 & 6 & 1524 & 9 & 11 & 844 & 11 & 16 & 2008\\ \hline
+9 & 2 & 500 & 13 & 6 & 1920 & 10 & 11 & 1208 & 12 & 16 & 2490\\ \hline
+10 & 2 & 716 & 14 & 6 & 2388 & 11 & 11 & 1698 & 13 & 16 & 3140\\ \hline
+11 & 2 & 986 & 15 & 6 & 2934 & 12 & 11 & 2320 & 14 & 16 & 3964\\ \hline
+12 & 2 & 1316 & 16 & 6 & 3564 & 13 & 11 & 3080 & 15 & 16 & 4968\\ \hline
+13 & 2 & 1712 & 17 & 6 & 4284 & 14 & 11 & 3548 & 16 & 16 & 6158\\ \hline
+14 & 2 & 2180 & 18 & 6 & 5100 & 15 & 11 & 4094 & 17 & 16 & 7540\\ \hline
+15 & 2 & 2726 & 6 & 7 & 144 & 16 & 11 & 4724 & 18 & 16 & 9120\\ \hline
+16 & 2 & 3356 & 7 & 7 & 290 & 17 & 11 & 5444 & 8 & 17 & 398\\ \hline
+17 & 2 & 4076 & 8 & 7 & 520 & 18 & 11 & 6260 & 9 & 17 & 918\\ \hline
+18 & 2 & 4892 & 9 & 7 & 840 & 7 & 12 & 240 & 10 & 17 & 1440\\ \hline
+4 & 3 & 0 & 10 & 7 & 1056 & 8 & 12 & 558 & 11 & 17 & 2184\\ \hline
+5 & 3 & \textbf{72} & 11 & 7 & 1326 & 9 & 12 & 900 & 12 & 17 & 2620\\ \hline
+6 & 3 & 132 & 12 & 7 & 1656 & 10 & 12 & 1236 & 13 & 17 & 3230\\ \hline
+7 & 3 & 222 & 13 & 7 & 2052 & 11 & 12 & 1704 & 14 & 17 & 4020\\ \hline
+8 & 3 & 348 & 14 & 7 & 2520 & 12 & 12 & 2310 & 15 & 17 & 4996\\ \hline
+9 & 3 & 516 & 15 & 7 & 3066 & 13 & 12 & 3060 & 16 & 17 & 6164\\ \hline
+10 & 3 & 732 & 16 & 7 & 3696 & 14 & 12 & 3960 & 17 & 17 & 7530\\ \hline
+11 & 3 & 1002 & 17 & 7 & 4416 & 15 & 12 & 4506 & 18 & 17 & 9100\\ \hline
+12 & 3 & 1332 & 18 & 7 & 5232 & 16 & 12 & 5136 & 8 & 18 & 360\\ \hline
+13 & 3 & 1728 & 6 & 8 & 102 & 17 & 12 & 5856 & 9 & 18 & 960\\ \hline
+14 & 3 & 2196 & 7 & 8 & 296 & 18 & 12 & 6672 & 10 & 18 & 1428\\ \hline
+15 & 3 & 2742 & 8 & 8 & 510 & 7 & 13 & 168 & 11 & 18 & 2142\\ \hline
+16 & 3 & 3372 & 9 & 8 & 820 & 8 & 13 & 528 & 12 & 18 & 2796\\ \hline
+17 & 3 & 4092 & 10 & 8 & 1232 & 9 & 13 & \textbf{990} & 13 & 18 & 3360\\ \hline
+18 & 3 & 4908 & 11 & 8 & 1502 & 10 & 13 & 1292 & 14 & 18 & 4110\\ \hline
+5 & 4 & 52 & 12 & 8 & 1832 & 11 & 13 & 1732 & 15 & 18 & 5052\\ \hline
+6 & 4 & \textbf{168} & 13 & 8 & 2228 & 12 & 13 & 2316 & 16 & 18 & 6192\\ \hline
+7 & 4 & 258 & 14 & 8 & 2696 & 13 & 13 & 3050 & 17 & 18 & 7536\\ \hline
+8 & 4 & 384 & 15 & 8 & 3242 & 14 & 13 & 3940 & 18 & 18 & 9090\\ \hline
+9 & 4 & 552 & 16 & 8 & 3872 & 15 & 13 & 4992 & 8 & 19 & 250\\ \hline
+10 & 4 & 768 & 17 & 8 & 4592 & 16 & 13 & 5622 & 9 & 19 & 888\\ \hline
+11 & 4 & 1038 & 18 & 8 & 5408 & 17 & 13 & 6342 & 10 & 19 & 1440\\ \hline
+12 & 4 & 1368 & 6 & 9 & 72 & 18 & 13 & 7158 & 11 & 19 & 2112\\ \hline
+13 & 4 & 1764 & 7 & 9 & \textbf{324} & 7 & 14 & 110 & 12 & 19 & 3024\\ \hline
+14 & 4 & 2232 & 8 & 9 & 516 & 8 & 14 & 516 & 13 & 19 & 3536\\ \hline
+15 & 4 & 2778 & 9 & 9 & 810 & 9 & 14 & 948 & 14 & 19 & 4240\\ \hline
+16 & 4 & 3408 & 10 & 9 & 1212 & 10 & 14 & 1382 & 15 & 19 & 5142\\ \hline
+17 & 4 & 4128 & 11 & 9 & 1728 & 11 & 14 & 1788 & 16 & 19 & 6248\\ \hline
+18 & 4 & 4944 & 12 & 9 & 2058 & 12 & 14 & 2344 & 17 & 19 & 7564\\ \hline
+5 & 5 & 42 & 13 & 9 & 2454 & 13 & 14 & 3056 & 18 & 19 & 9096\\ \hline
+\end{tabular}
+\end{center}
+}
 
 
 \section{Preverjanje manjših grafov}
