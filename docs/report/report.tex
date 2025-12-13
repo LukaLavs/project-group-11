@@ -591,22 +591,6 @@ Postopek je sledeč:
 \item Preverimo, ali ima graf z maksimalnim indeksom obliko $K_{k} + \overline{K}_{n-k}$, kot napoveduje izrek.
 \end{enumerate}
 
-V spodnji tabeli je za vsako število vozlišč $n$ prikazana minimalna in maksimalna dosežena vrednosti 
-komplementarnega drugega zagrebškega indeksa $\cM(G)$ ter pripadajoč parameter $k$.
-
-\begin{tabular}{|c|c|c|c|c|c|}
-\hline
-n & Min $cM_2$ & Je join & $k$ & Max $cM_2$ & $k$ \\
-\hline
-3 & 0 & Da & 2 & 6 & 1 \\
-4 & 0 & - & - & 24 & 1 \\
-5 & 0 & - & - & 72 & 2 \\
-6 & 0 & - & - & 168 & 2 \\
-7 & 0 & - & - & 324 & 3 \\
-8 & 0 & - & - & 600 & 3 \\
-\hline
-\end{tabular}
-
 Pri minimalnih vrednostih indeksa se pogosto pojavljajo grafi, kjer je večina vozlišč povezanih oziroma 
 je skoraj celoten graf popoln, medtem ko je preostali del izoliran. Zaradi tega so razlike med kvadrati 
 stopenj sosednjih vozlišč zelo majhne ali celo ničelne. Iz tabele je razvidno, da za 
@@ -621,7 +605,6 @@ vrednosti indeksa. Iz tabele je razvidno da so bile maksimalne vrednosti vedno d
 kar je skladno z trditvijo~\ref{tr:domneva}.
 
 Na slikah so prikazani minimalni in maksimalni grafi za $n = 3, 4, 5$.  
-% SLIKE ZA N = 3,4,5
 
 \section{Metaheuristične metode}
 
@@ -634,9 +617,6 @@ Za večje grafe ($n \geq 20$), kjer točne metode (MILP) postanejo računsko pre
 in jo iterativno izboljšuje z zamenjavo povezav v grafu. Na začetku (pri visoki temperaturi) algoritem 
 sprejema tudi slabše rešitve, kar omogoča izogibanje lokalnim optimumom. S časom temperatura pada in 
 algoritem konvergira k dobri rešitvi.
-
-
-
 
 
 
