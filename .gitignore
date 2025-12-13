@@ -233,3 +233,5 @@ enviroment.yaml
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+test_max.png 
+test_min.png
