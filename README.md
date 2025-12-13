@@ -26,7 +26,6 @@ Report is found in `docs/report/report.pdf`.
     from conjecture import Conjecture
     conjecture = Conjecture()
     min_cM_5_2 = conjecture.min.cM(5, 2) # Minimal cM2 for given order 5 and cyclomatic number 2 
-    conjecture_min
     max_cM_20_19 = conjecture.max.cM(20, 19) # Maximal cM2 for given parameters
     conjecture.max.save_graph(conjecture.max.G(20, 19), path="test_max.png") # Gives image of optimal graph
     ```
@@ -39,7 +38,7 @@ method which finds both graphs which reach minimal *Second Complementary Zagreb 
     while not nx.is_connected(H):
         H = nx.gnm_random_graph(n, m)
     from simulated_annealing import SA, FunctionsMax, FunctionsMin 
-    sa_min = SA(functions=FunctionsMin(), G=G, _type='min)
+    sa_min = SA(functions=FunctionsMin(), G=G, _type='min')
     G, min_cM2 = sa_min.simulated_annealing()
     # Similarly for max
     ```
