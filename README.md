@@ -10,7 +10,7 @@ Report is found in `docs/report/report.pdf`.
 
 ## Main scripts:
 - `src/theorem.py` defines a class **Theorem** which implements $\Gamma$, $f$  and other functions, which come in handy when analyzing graphs in form $K_k + \overline{K}_{n-k}$.
-    ```
+    ```python
     from theorem import Theorem 
     n = 14 
     k = theorem.gamma(n) # NOTE: sometimes gamma returns tuple
@@ -21,8 +21,8 @@ Report is found in `docs/report/report.pdf`.
     a, b = theorem.concave_on(n) # f is concave on [a, b]
     v = theorem.cyclomatic_number_of(n, k) # gives cyclomatic number
     ```
-- `src/conjecture.py` defines a class Conjecture. It gives methods to visualize conjectured graphs and calculate their $\operatorname{cM}_2$. 
-    ```
+- `src/conjecture.py` defines a class Conjecture. It gives methods to visualize conjectured graphs and calculate their ${cM}_2$. 
+    ```python
     from conjecture import Conjecture
     conjecture = Conjecture()
     min_cM_5_2 = conjecture.min.cM(5, 2) # Minimal cM2 for given order 5 and cyclomatic number 2 
@@ -34,7 +34,7 @@ Report is found in `docs/report/report.pdf`.
 Linear Programming* which solves minimal problem of *Second Complementary Zagreb Index* for graphs with small order $n$.
 - `src/simulated_annealing.py` is a implementation of an heuristic 
 method which finds both graphs which reach minimal *Second Complementary Zagreb Index* as those which reach its maximum.
-    ``` 
+    ``` python
     H = nx.gnm_random_graph(n, m)
     while not nx.is_connected(H):
         H = nx.gnm_random_graph(n, m)
