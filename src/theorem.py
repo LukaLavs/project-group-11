@@ -7,12 +7,12 @@ def cbrt(x):
     return rect(r**(1/3), theta/3)
 class Theorem: 
     @staticmethod
-    def cM2(n, k):
+    def f(n, k):
         """Complementary second Zagreb index for maximal graphs"""
         return k*(n-k)*((n-1)**2-k**2)
 
     @staticmethod
-    def relaxed_max_cM2(n):
+    def relaxed_gamma(n):
         """Solution of cM2_k(n, k) == 0 over reals"""
         xi = 6 * cbrt(-3)**2 * (8 + n*(-16 + 11*n))
         psi = -9 * (n - 2) * n * (3*n - 2) + 4 * sqrt(3) * sqrt(
@@ -20,33 +20,23 @@ class Theorem:
         return (1/72 * (18*n + xi / cbrt(psi) - 6 * cbrt(-3) * cbrt(psi))).real
 
     def gamma(self, n):
-        """By theorem. Equivalent to arg_max_cM2"""
+        """By theorem. Returns optimal k."""
         A = 9*(n-2)*n*(3*n-2) + 4*sqrt(3)*sqrt(-(n-1)**2 * (n*(n*(2*n*(34*n - 73) + 201) - 128) + 32))
         B = (16 - 11*n)*n - 8 
         p = exp(1j * pi / 3)
         h = 1/12 * (3*n - cbrt(3) * p**4 * cbrt(A) + 3**(2/3)*B/(p**4*cbrt(A)))
         h = h.real
-        if self.cM2(n, ceil(h)) == self.cM2(n, floor(h)):
+        if self.f(n, ceil(h)) == self.f(n, floor(h)):
             return (floor(h), ceil(h))
-        return max([floor(h), ceil(h)], key=lambda k: self.cM2(n, k))
+        return max([floor(h), ceil(h)], key=lambda k: self.f(n, k))
     
     def tuple_gamma(self, n):
-        """Always returns tuple, since gamma sometimes gives tuple."""
+        """By theorem. Unlike gamma it always returns tuple."""
         k = self.gamma(n) 
         return tuple({k}) if isinstance(k, int) else k
-
-    def arg_max_cM2(self, n):
-        """argmax_k cM2(n, k)"""
-        k = self.relaxed_max_cM2(n)
-        if self.cM2(n, ceil(k)) == self.cM2(n, floor(k)):
-            return (floor(k), ceil(k))
-        return max(
-            [floor(k), ceil(k)], 
-            key=lambda k: self.cM2(n, k)
-            )
     
-    def max_cM2(self, n):
-        return self.cM2(n, self.tuple_gamma(n)[0])
+    def cM2(self, n):
+        return self.f(n, self.tuple_gamma(n)[0])
     
     @staticmethod
     def cyclomatic_number_of(n, k):
@@ -87,7 +77,7 @@ if __name__ == "__main__":
 
 
     theorem = Theorem()
-    print([(n, theorem.tuple_gamma(n)[0], theorem.max_cM2(n)) for n in range(5, 250)])
+    print([(n, theorem.tuple_gamma(n)[0], theorem.cM2(n)) for n in range(5, 250)])
 
 ##### There exist orders n of G, giving two solutions for k,
 # such orders n are: [12, 117, 450, 4674, 48620, 505829, 1955714, 20347010, ...]

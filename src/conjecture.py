@@ -3,15 +3,16 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 from typing import Mapping, Collection, Hashable, Optional
+from abc import ABC, abstractmethod
 from theorem import Theorem
 
-class Conjecture:
+class Base:
     @staticmethod
     def graph_exists(n, v):
         return n >= ceil((3 + sqrt(1 + 8*v)) / 2)
     
     @staticmethod
-    def save_graph(
+    def _save_graph(
         G: nx.Graph, path: str, 
         layout_fun: Optional[Mapping[Hashable, Collection[float]]]
     ) -> None:
@@ -25,9 +26,20 @@ class Conjecture:
         plt.axis("off")
         plt.savefig(path, dpi=300)
         plt.close()
-    pass 
+    
+    @abstractmethod
+    def cM2(n: int, v: int) -> int:
+        pass 
 
-class Max(Conjecture):
+    @abstractmethod 
+    def G(n: int, v: int) -> nx.Graph:
+        pass
+
+    @abstractmethod
+    def save_graph(self, G: nx.Graph, path: str) -> None:
+        pass
+
+class Max(Base):
     def find_a_b(self, n, v):
         """Let n be the order of graph G, and let v be its cyclomatic number."""
         assert super().graph_exists(n, v), "Graph does not exist."
@@ -85,10 +97,9 @@ class Max(Conjecture):
             return G
 
     def save_graph(self, G, path):
-        super().save_graph(G, path, layout_fun=nx.circular_layout)
+        super()._save_graph(G, path, layout_fun=nx.circular_layout)
 
-
-class Min(Conjecture):
+class Min(Base):
     def cM2(self, n, v):
         assert super().graph_exists(n, v), "Graph does not exist."
         if v == 1: 
@@ -125,19 +136,24 @@ class Min(Conjecture):
         else: raise ValueError("Not implemented")
 
     def save_graph(self, G, path):
-        super().save_graph(G, path, layout_fun=nx.spring_layout)
+        super()._save_graph(G, path, layout_fun=nx.spring_layout)
+
+class Conjecture:
+    def __init__(self):
+        self.min = Min() 
+        self.max = Max()
 
 if __name__ == "__main__":
 
     def latex_table(n, m, cols=5, space="0.5cm"):
-        conjecture_max = Max()
+        conjecture= Conjecture()
         theorem = Theorem()
         def g(n):
             k = theorem.gamma(n)
             return tuple({k}) if isinstance(k, int) else k
         values = [
                 (
-                    n, v, conjecture_max.cM2(n, v), 
+                    n, v, conjecture.max.cM2(n, v), 
                     any(v == theorem.cyclomatic_number_of(n, k) for k in g(n))
             ) 
             for v in range(1, n)
@@ -164,18 +180,8 @@ if __name__ == "__main__":
             print(" & ".join(row_items) + r"\\ \hline")
         print(r"\end{tabular}")
 
-
-    # latex_table(20, 19, cols=4) 
-
-    # conjecture_max = Max()
-    # print(conjecture_max.cM2(20, 19))
-
-    # conjecture_max = Max()
-    # print(conjecture_max.cM2(7, 4))
-    # conjecture_max.save_graph(conjecture_max.G(8, 9), path="docs/report/figures/conjecture_max_8_9.png")
-    # conjecture_max.save_graph(conjecture_max.G(14, 9), path="docs/report/figures/conjecture_max_14_9.png")
-
-    # conjecture_min = Min() 
-    # conjecture_min.save_graph(conjecture_min.G(5, 2), path="docs/report/figures/conjecture_min_5_2.png")
-
-
+    conjecture = Conjecture() 
+    print("min: ", conjecture.min.cM2(20, 7))
+    print("max: ", conjecture.max.cM2(20, 19))
+    conjecture.max.save_graph(conjecture.max.G(20, 19), "test_max.png")
+    conjecture.min.save_graph(conjecture.min.G(20, 7), "test_min.png")
