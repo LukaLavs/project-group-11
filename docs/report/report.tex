@@ -363,6 +363,32 @@ $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k
 \end{center}
 }
 
+\section{Preverjanje manjših grafov}
+V tem razdelku empirično preverimo doseganje minimalnih in maksimalnih vrednosti drugega komplementarnega 
+Zagrebškega indeksa $\cM(G)$ za vse povezane grafe majhnega reda $n$.
+Postopek je sledeč:
+\begin{enumerate}
+\item Sistematično generiramo vse neizomorfne povezane grafe za izbrana števila vozlišč ($n = 3, 4, 5, 6, 7, 8$).
+\item Za vsak graf izračunamo $\cM(G)$ po definiciji.
+\item Zabeležimo grafe z minimalno in maksimalno vrednostjo indeksa.
+\item Preverimo, ali ima graf z maksimalnim indeksom obliko $K_{k} + \overline{K}_{n-k}$, kot napoveduje izrek.
+\end{enumerate}
+
+Pri minimalnih vrednostih indeksa se pogosto pojavljajo grafi, kjer je večina vozlišč povezanih oziroma 
+je skoraj celoten graf popoln, medtem ko je preostali del izoliran. Zaradi tega so razlike med kvadrati 
+stopenj sosednjih vozlišč zelo majhne ali celo ničelne. Iz tabele je razvidno, da za 
+vse obravnavane vrednosti $n \leq 8$ minimalno vrednost indeksa $\cM(G)$ dosežejo grafi, ki so 
+regularni ali ciklični, saj imajo vozlišča enako stopnjo, kar zmanjša razliko kvadratov stopenj na 
+povezavah na nič. Posledično je minimalna vrednost indeksa enaka nič.
+
+Pri maksimalnih vrednostih indeksa pa prevladujejo grafi, ki so izomorfni grafu oblike $K_k + \overline{K}_{n-k}$, 
+torej sestavljeni iz popolnega grafa z $k$ vozlišči in nepovezanih vozlišč z ostankom $n-k$, med katerima 
+so vse možne povezave. Ti grafi zaradi močne razlike v stopnjah vozlišč med komponentama dosegajo največje
+vrednosti indeksa. Iz tabele je razvidno da so bile maksimalne vrednosti vedno dosežene pri takšnih strukturah, 
+kar je skladno z trditvijo~\ref{tr:domneva}.
+
+Na slikah so prikazani minimalni in maksimalni grafi za $n = 3, 4, 5$.  
+
 \section{Grafi danega ciklomatičnega števila}
 
 Problem maksimalne vrednosti drugega komplementarnega Zagrebškega indeksa pri danem številu 
@@ -579,32 +605,6 @@ $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ 
 \end{center}
 }
 
-
-\section{Preverjanje manjših grafov}
-V tem razdelku empirično preverimo doseganje minimalnih in maksimalnih vrednosti drugega komplementarnega 
-Zagrebškega indeksa $\cM(G)$ za vse povezane grafe majhnega reda $n$.
-Postopek je sledeč:
-\begin{enumerate}
-\item Sistematično generiramo vse neizomorfne povezane grafe za izbrana števila vozlišč ($n = 3, 4, 5, 6, 7, 8$).
-\item Za vsak graf izračunamo $\cM(G)$ po definiciji.
-\item Zabeležimo grafe z minimalno in maksimalno vrednostjo indeksa.
-\item Preverimo, ali ima graf z maksimalnim indeksom obliko $K_{k} + \overline{K}_{n-k}$, kot napoveduje izrek.
-\end{enumerate}
-
-Pri minimalnih vrednostih indeksa se pogosto pojavljajo grafi, kjer je večina vozlišč povezanih oziroma 
-je skoraj celoten graf popoln, medtem ko je preostali del izoliran. Zaradi tega so razlike med kvadrati 
-stopenj sosednjih vozlišč zelo majhne ali celo ničelne. Iz tabele je razvidno, da za 
-vse obravnavane vrednosti $n \leq 8$ minimalno vrednost indeksa $\cM(G)$ dosežejo grafi, ki so 
-regularni ali ciklični, saj imajo vozlišča enako stopnjo, kar zmanjša razliko kvadratov stopenj na 
-povezavah na nič. Posledično je minimalna vrednost indeksa enaka nič.
-
-Pri maksimalnih vrednostih indeksa pa prevladujejo grafi, ki so izomorfni grafu oblike $K_k + \overline{K}_{n-k}$, 
-torej sestavljeni iz popolnega grafa z $k$ vozlišči in nepovezanih vozlišč z ostankom $n-k$, med katerima 
-so vse možne povezave. Ti grafi zaradi močne razlike v stopnjah vozlišč med komponentama dosegajo največje
-vrednosti indeksa. Iz tabele je razvidno da so bile maksimalne vrednosti vedno dosežene pri takšnih strukturah, 
-kar je skladno z trditvijo~\ref{tr:domneva}.
-
-Na slikah so prikazani minimalni in maksimalni grafi za $n = 3, 4, 5$.  
 
 \section{Metaheuristične metode}
 
