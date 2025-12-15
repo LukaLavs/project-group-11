@@ -391,11 +391,11 @@ so vse možne povezave. Ti grafi zaradi močne razlike v stopnjah vozlišč med 
 vrednosti indeksa. Iz tabele je razvidno da so bile maksimalne vrednosti vedno dosežene pri takšnih strukturah, 
 kar je skladno z trditvijo~\ref{tr:domneva}.
 
-Na spodnji sliki je prikazanih nekaj primerov grafov z različnimi vrednostmi drugega komplementarnega Zagrebškega indeksa.
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/brute_force_img.png}
+    \includegraphics[width=0.65\textwidth]{figures/brute_force_img.png}
     \label{fig:brute_force_grafi}
+    \caption{Primeri grafov z različnimi vrednostmi DKZI.}
 \end{figure}
 
 \section{Metaheuristične metode}
@@ -530,12 +530,12 @@ Zanimiv ekspirementalni pristop, ki skuša premostiti težave metod MILP in SA j
 Vsak graf na $n$ vozliščih ter z $m$ povezavami nam da naraščajoče zaporedje njegovih stopenj. Ker je $2m$ 
 enak seštevku vseh stopenj ter imamo $n$ vozlišč, opazimo, da ima graf maksimalno stopnjo enako največ 
 $\lceil (2m)/n \rceil$. Torej za dana $n$ ter $m$ lahko poiščemo vsa različna naraščajoča zaporedja stopenj, 
-to so namreč ravno particije števila $2m$ na $n$ delov z števili iz množice $\{1, \ldots, \lceil (2m)/n \rceil\}$, 
+to so namreč ravno particije števila $2m$ na $n$ delov s števili iz množice $\{1, \ldots, \lceil (2m)/n \rceil\}$, 
 od katerih pa moramo odstraniti tiste, katere ne morejo tvoriti grafa. To storimo z Erdős Gallai-jevem 
 izrekom~\cite{erdos}. Nato pa graf razdelimo v gruče, kjer so vozlišča enake stopnje. Sedaj za dano 
 zaporedje stopenj (za dano particijo) iščemo tako simetrično matriko $D$, ki predstavlja števila povezav 
 med gručami, in ki minimizira DKZI. To storimo z celoštevilskem linearnem programiranjem (ILP). Ko imamo za vsako 
-možno zaporedje stopenj izračunano optimalno vrednost DKZI ter matriko $A$, za iskani minimalni DKZI preprosto 
+možno zaporedje stopenj izračunano optimalno vrednost DKZI ter matriko $D$, za iskani minimalni DKZI preprosto 
 vzemimo najmanjšo izmed vrednosti, ki jih podajo posamezna zaporedja stopenj.
 
 \begin{opomba}
