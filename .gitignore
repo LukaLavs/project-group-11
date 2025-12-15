@@ -12,6 +12,7 @@
 *.cb2
 *.xmpdata
 *.xmpi
+*.*ERROR
 
 ## Intermediate documents:
 *.dvi
@@ -235,3 +236,5 @@ __pycache__/
 .ipynb_checkpoints/
 test_max.png 
 test_min.png
+test_graph.png
+.envrc
