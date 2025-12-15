@@ -4,9 +4,13 @@
 - [On a Conjecture Concerning the
 Complementary Second Zagreb Index](https://arxiv.org/pdf/2501.01295)
 - [Recent Proof of Conjecture](https://www.aimspress.com/article/doi/10.3934/math.2025721?viewType=HTML)
+- [Erdős-Gallai theorem on degree sequence realizability](https://en.wikipedia.org/wiki/Erdős-Gallai_theorem)
+- [JDM Algorithm for expirimental approach](https://arxiv.org/abs/1509.07076)
 
 ## Report 
-Report is found in `docs/report/report.pdf`.
+Report is found in `docs/report/report.pdf`. It analyzes a theorem on the Complementary Second Zagreb Index (CSZI) and provides a function of 
+$n$ required by the theorem. It examines the minimal and maximal CSZI values of graphs with a given order $n$ and cyclomatic number $\nu$. Additionally, it presents two conjectures that solve the problem for almost all graphs.
+
 
 ## Main scripts:
 - `src/theorem.py` defines a class **Theorem** which implements $\Gamma$, $f$  and other functions, which come in handy when analyzing graphs in form $K_k + \overline{K}_{n-k}$.
@@ -34,10 +38,10 @@ Linear Programming* which solves minimal problem of *Second Complementary Zagreb
 - `src/simulated_annealing.py` is a implementation of an heuristic 
 method which finds both graphs which reach minimal *Second Complementary Zagreb Index* as those which reach its maximum.
     ``` python
+    from simulated_annealing import (SA, FunctionsMax, FunctionsMin)
     H = nx.gnm_random_graph(n, m)
     while not nx.is_connected(H):
-        H = nx.gnm_random_graph(n, m)
-    from simulated_annealing import SA, FunctionsMax, FunctionsMin 
+        H = nx.gnm_random_graph(n, m) # Build starting graph
     sa_min = SA(functions=FunctionsMin(), G=G, _type='min')
     G, min_cM2 = sa_min.simulated_annealing()
     # Similarly for max
@@ -46,7 +50,13 @@ method which finds both graphs which reach minimal *Second Complementary Zagreb 
 - `src/patterns_in minimal_graphs.ipynb` combines MILP for exact solutions on small graphs and Simulated Annealing (SA) for heuristic solutions on larger graphs to find minimal and maximal *Second Complementary Zagreb Index* values.
 - `src/patterns_in maximal_graphs.ipynb` integrates brute-force enumeration for small graphs and simulated annealing (SA) heuristic for larger graphs to find maximal *Second Complementary Zagreb Index* values across different graph sizes.
 
+## Expirimental scripts 
+- `tests/expirimental.py` implements a sketch of an expirimental algorithm defined in report. 
 
+## Results 
+   Graph images are found in `optimal-graphs`. Note that some graphs with minimal $cM_2$ values are not necessarily optimal, as they were obtained using a heuristic method.
+
+   Some other images and expiriments are found in `notebooks`.
 ## Authors:
 - Luka Lavš 
 - Tinka Napret-Kaučič
