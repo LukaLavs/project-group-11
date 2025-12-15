@@ -4,9 +4,9 @@ import matplotlib.pyplot as plt
 
 from typing import Mapping, Collection, Hashable, Optional
 from abc import ABC, abstractmethod
-from theorem import Theorem
+from .theorem import Theorem
 
-class Base:
+class Base(ABC):
     @staticmethod
     def graph_exists(n, v):
         return n >= ceil((3 + sqrt(1 + 8*v)) / 2)
