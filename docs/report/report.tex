@@ -56,6 +56,8 @@ vsebine.}
 \usepackage{algorithm}      % za algoritme
 \usepackage{graphicx}       % za slike
 \usepackage{subcaption}
+\usepackage{caption}
+\usepackage[T1]{fontenc}
 \floatname{algorithm}{Algoritem}
 \renewcommand{\listalgorithmname}{Kazalo algoritmov}
 
@@ -74,6 +76,7 @@ vsebine.}
 \newcommand{\cM}{\operatorname{cM}_2}
 \newcommand{\argmax}{\mathop{\mathrm{arg\,max}}\limits}
 \newcommand{\CC}{\mathcal{C}_{n, k}}
+\newcommand{\VV}{\mathbf{V}}
 % Lahko se zgodi, da je ukaz \C definiral že paket hyperref,
 % zato dobite napako: Command \C already defined.
 % V tem primeru namesto ukaza \newcommand uporabite \renewcommand
@@ -360,9 +363,10 @@ $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k$ & $n$ & $k
 191 & 74 & 234 & 91 & 277 & 108 & 320 & 125 & 363 & 142 & 406 & 158 & 449 & 175\\ \hline
 192 & 75 & 235 & 92 & 278 & 108 & 321 & 125 & 364 & 142 & 407 & 159 & 450 & \textbf{175,176}\\ \hline
 \end{tabular}
+\captionof{table}{Tabela, ki prikazuje vrednosti $k=\Gamma(n)$ za dan parameter $n$.}
 \end{center}
 }
-
+\newpage
 \section{Preverjanje manjših grafov}
 V tem razdelku empirično preverimo doseganje minimalnih in maksimalnih vrednosti drugega komplementarnega 
 Zagrebškega indeksa $\cM(G)$ za vse povezane grafe majhnega reda $n$.
@@ -394,6 +398,17 @@ Na spodnji sliki je prikazanih nekaj primerov grafov z različnimi vrednostmi dr
     \label{fig:brute_force_grafi}
 \end{figure}
 
+\section{Metaheuristične metode}
+
+Metaheuristika je množica algoritemskih konceptov in strategij visoke ravni, ki se uporabljajo
+za definiranje heuristične metode, primerne za širok nabor optimizacijskih problemov. Iščejo dovolj
+dobre rešitve kompleksnih problemov, kjer je podrobno iskanje najboljše rešitve nemogoče ali pa traja predolgo.
+
+Za večje grafe ($n \geq 20$), kjer točne metode (MILP) postanejo računsko prezahtevne, sv uporabili metahevristiko 
+\textbf{Simulated Annealing}. To je stohastična optimizacijska metoda, ki začne z naključno rešitvijo 
+in jo iterativno izboljšuje z zamenjavo povezav v grafu. Na začetku (pri visoki temperaturi) algoritem 
+sprejema tudi slabše rešitve, kar omogoča izogibanje lokalnim optimumom. S časom temperatura pada in 
+algoritem konvergira k dobri rešitvi.
 
 
 \section{Grafi danega ciklomatičnega števila}
@@ -452,7 +467,7 @@ $f_{uv}$ pa modelirajmo povezanost grafa.
 &\forall i \in \{1, \dots, n\}, \forall t \in \{1, \dots, n-1\}: \quad y_{it} \in \{0,1\}
 \end{align}
 
-Najdeni grafi so sledečih oblik, pri čemer pa je vredno omeniti, da grafi za dan red $n$ ter 
+Vredno je omeniti, da grafi za dan red $n$ ter 
 ciklomatično število $\nu$ niso nujno unikatni. 
 
 \begin{figure}[h]
@@ -483,6 +498,100 @@ ciklomatično število $\nu$ niso nujno unikatni.
     \item $\forall \nu\geq 3, \forall n\geq 2\nu:\ \cM(G_{n, \nu}) = 8$.
   \end{enumerate}
 \end{hipoteza}
+
+\subsubsection{Ekspirementalni pristop}
+V hipotezi~\ref{hip:min} namenoma nismo razčistili oblike grafov reda 
+$\lceil (3 + \sqrt(1 + 8\nu))/2 \rceil \leq n < 2\nu - 1$ ter ciklomatičnega števila 
+$v \geq 3$. To zato ker so le tej grafi precej gostejše in netrivialno povezani. Prav tako dozdajšni 
+metodi (MILP) in (SA) obe bodisi eksponentno narasteta v časovni zahtevnosti, bodisi pa podajata vse manj 
+zanesljive rezultate. 
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/min_n7__v5_val28.png}
+        \caption{Graf reda 7 z ciklomatičnem številom 5, ki doseže minimalno vrednost DKZI (28).}
+        \label{fig:7_5}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/min_n9__v16_val68.png}
+        \caption{Graf reda 9 z ciklomatičnem številom 16, ki doseže minimalno vrednost DKZI (68).}
+        \label{fig:9_16}
+    \end{subfigure}
+    \caption{Primera netrivialnih grafov, ki dosežeta minimalno vrednost DKZI za dano število vozlišč ter dano 
+    ciklomatično število.}
+    \label{fig:hard_min_zgled}
+\end{figure}
+
+Zanimiv ekspirementalni pristop, ki skuša premostiti težave metod MILP in SA je sledeč: 
+Vsak graf na $n$ vozliščih ter z $m$ povezavami nam da naraščajoče zaporedje njegovih stopenj. Ker je $2m$ 
+enak seštevku vseh stopenj ter imamo $n$ vozlišč, opazimo, da ima graf maksimalno stopnjo enako največ 
+$\lceil (2m)/n \rceil$. Torej za dana $n$ ter $m$ lahko poiščemo vsa različna naraščajoča zaporedja stopenj, 
+to so namreč ravno particije števila $2m$ na $n$ delov z števili iz množice $\{1, \ldots, \lceil (2m)/n \rceil\}$, 
+od katerih pa moramo odstraniti tiste, katere ne morejo tvoriti grafa. To storimo z Erdős Gallai-jevem 
+izrekom~\cite{erdos}. Nato pa graf razdelimo v gruče, kjer so vozlišča enake stopnje. Sedaj za dano 
+zaporedje stopenj (za dano particijo) iščemo tako simetrično matriko $D$, ki predstavlja števila povezav 
+med gručami, in ki minimizira DKZI. To storimo z celoštevilskem linearnem programiranjem (ILP). Ko imamo za vsako 
+možno zaporedje stopenj izračunano optimalno vrednost DKZI ter matriko $A$, za iskani minimalni DKZI preprosto 
+vzemimo najmanjšo izmed vrednosti, ki jih podajo posamezna zaporedja stopenj.
+
+\begin{opomba}
+  Tak pristop lahko seže po veliko večjih grafih, vendar je vredno omeniti naslednje. Lahko se zgodi, da 
+  za katero zaporedje stopenj ILP vrne matriko $D$ s katero se ne da tvoriti grafa. Preverjanje grafičnosti 
+  matrike $D$ so analizirali~\textcite{jdm}. Namreč znano je, da 
+  pogoji za grafičnost matrike $D$ niso linearni. Ker lahko v ILP modeliramo zgolj povezanost med gručami, 
+  se lahko zgodi tudi da $D$ poda nepovezan graf. Vse to nam ne povzroči težav, če le obstaja neko drugo 
+  zaporedje stopenj in njegova optimalna grafična matrika $D'$, ki ima manjšo vrednost DKZI. Sicer pa 
+  optimalnost algoritma ni zagotovljena, težavno zaporedje izpustimo.
+\end{opomba}
+
+% Z željo po boljših metodah si zamislimo naslednji algoritem.
+% Naj bo $G_{n, \nu}$ graf, ki pri danem $n$ in $\nu$ doseže minimalno vrednost DKZI ter naj bo 
+% $m=n-1+\nu$ število njegovih povezav.
+
+% Naj bo 
+% $\VV = \{V_1, \ldots, V_k\}$ particija njegovih vozlišč na gruče $V_i$ sestavljene iz vozlišč 
+% enake stopnje $s_i$. Naj bo matrika $A \in \R^{k\times k}$ matrika katere člen $a_{ij}$ opisuje število 
+% povezav iz gruče $V_i$ v gručo $V_j$. Seveda je največja stopnja v našem grafu enaka 
+% $s_M := \lceil (2m)/n \rceil$. Zato je particija $\VV$ enolično določena s particijami $p$ števila 
+% $2m$ na natanko $n$ delov s števili, ki ležijo v množici $[1, s_M]$. Da se ognemo particijam, ki 
+% predstavljajo nemogoče grafe uporabimo Erdős Gallai-jev izrek~\cite{erdos} in take odstranimo, 
+% ostalim particijam pravimo grafične.
+% Nato za vsako grafično particijo $p$ izračunajmo tako matriko $A$, ki z njo tvori graf, ki za dano število 
+% vozlišč $n$, ciklomatično število $\nu$ in seznam stopenj $p$, minimizira DKZI. To storimo z celoštevilskim 
+% linearnem programom (ILP), kjer opazimo, da je funkcijo $\cM$ precej lažje modelirati. Lahko bi celo minimizirali 
+% poljubno funkcijo $\sum_{uv \in E(G) \land d_G(u) \geq d_G(v)} h(d_G(u), d_G(v))$. 
+
+% Tak (ILP) nam tako za vsako grafično particijo izračuna matriko $A$ ter minimalno vrednost DKZI indeksa $\cM'$. 
+% Nato za minimalno vrednost DKZI grafa $G_{n, \nu}$ izberemo tisto $\cM'$, ki je izmed vseh minimalna. Dodatno nam 
+% optimalna particija $p*$ skupaj z optimalno matriko $A*$ poda tudi navodila za sestavo iskanega grafa.
+
+% \begin{opomba}
+%   Particija $p$ poda seznam stopenj, da se jo zapisati krajše kot slovar $\{s_i:\, n_i\}_i$, kjer 
+%   $s_i$ predstavlja stopnjo v grafu, $n_i$ pa število, ki pove kolikokrat se le ta stopnja pojavi.
+%   Dodatno se lahko zgodi, da kateri par seznama stopenj $p$ ter matrike povezanosti $A$ generira nemogoč 
+%   graf. Avtorji~\textcite{jdm} so podali algoritem, ki preveri ali je $(p, A)$ graf mogoč, če je 
+%   pa ga tudi konstruira. Zgoraj omenjen ILP pa je sledeč:
+%   \begin{align*}
+% &\min \sum_{i \geq j} a_{ij} (s_i^2 - s_j^2) \\[1mm]
+% &\text{p. p.} \\[1mm]
+% &\forall i, j:\; a_{ij} = a_{ji} \land a_{ij} \leq 0 \\[1mm]
+% &\forall i:\; \sum_{j}a_{ij} = n_i s_i \land d_i \geq 0 \land a_{ii} = 2d_i \\[1mm]
+% &\forall i, j:\; a_{ij} \leq n_i n_j \land a_{ii} \leq n_i (n_i - 1) \\[1mm]
+% &\text{Dodatni pogoji za povezanost grafa}
+%   \end{align*}
+
+% Vendar tu je največja težava to, da se lahko zgodi, da za kako particijo, ILP da rešitev kjer par 
+% (A, p) tvori bodisi nemogoč graf, bodisi nepovezan. Če je še optimalna vrednost nižja kot na drugih dobrih 
+% particijah, potem ne moremo veliko sklepati o globalnem minimumu, saj vsaj te particije nismo ustrezno razrešili, 
+% lahko bi namreč obstajal kak A ki bi bil grafičen, dal povezan graf, pa vseeno dal manjši cM2 indeks 
+% kakor grafi dani z drugimi pari (A, p). Zato tega razmisleka ne vstavimo v report.
+% \end{opomba}
+
+
 
 \subsection{Problem maksimuma}
 
@@ -609,34 +718,26 @@ $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ & $\cM(G_{n, \nu})$ & $n$ & $\nu$ 
 18 & 4 & 4944 & 12 & 9 & 2058 & 12 & 14 & 2344 & 17 & 19 & 7564\\ \hline
 5 & 5 & 42 & 13 & 9 & 2454 & 13 & 14 & 3056 & 18 & 19 & 9096\\ \hline
 \end{tabular}
+\captionof{table}{Tabela, ki prikazuje maksimalne vrednosti DKZI za dano število vozlišč $n$ 
+ter ciklomatično število $\nu$.}
 \end{center}
 }
 
 
-\section{Metaheuristične metode}
-
-Metaheuristika je množica algoritemskih konceptov in strategij visoke ravni, ki se uporabljajo
-za definiranje heuristične metode, primerne za širok nabor optimizacijskih problemov. Iščejo dovolj
-dobre rešitve kompleksnih problemov, kjer je podrobno iskanje najboljše rešitve nemogoče ali pa traja predolgo.
-
-Za večje grafe ($n \geq 20$), kjer točne metode (MILP) postanejo računsko prezahtevne, sv uporabili metahevristiko 
-\textbf{Simulated Annealing}. To je stohastična optimizacijska metoda, ki začne z naključno rešitvijo 
-in jo iterativno izboljšuje z zamenjavo povezav v grafu. Na začetku (pri visoki temperaturi) algoritem 
-sprejema tudi slabše rešitve, kar omogoča izogibanje lokalnim optimumom. S časom temperatura pada in 
-algoritem konvergira k dobri rešitvi.
 
 
 
-\section{Vzorci za minimalne in maksimalne grafe}
 
-Pri minimalnih grafih za ciklomatično število $k$ so minimalni grafi strukturirani kot cikel $C_n$ z $k$ dodatnimi 
+\section{Zaključek}
+
+Pri minimalnih grafih za ciklomatično število $\nu$ so minimalni grafi strukturirani kot cikel $C_n$ z $\nu$ dodatnimi 
 povezavami. Te dodatne povezave so razporejene enakomerno po ciklu, kar zagotavlja majhne razlike med stopnjami 
 sosednjih vozlišč. Pri večjih $n$ ta vzorec postane stabilen, saj si grafi postajajo strukturno podobni.
 
 Za maksimalne grafe pri majhnih $n$ maksimalne vrednosti dosegajo grafi z zvezdasto strukturo, kjer ima eno centralno 
-vozlišče visoko stopnjo, ostala pa nizko. Ko $n$ narašča, se struktura razvije v join graf oblike $K_j + \overline{K}_{n-j}$. 
-Tu je $K_j$ poln graf z $j$ vozlišči, $\overline{K}_{n-j}$ pa množica izoliranih vozlišč, povezanih le na $K_j$. 
-Ta struktura ustvari velika razlika med stopnjami: vozlišča v $K_j$ imajo stopnjo blizu $n$, zunanja pa okoli $j$. 
+vozlišče visoko stopnjo, ostala pa nizko. Ko $n$ narašča, se struktura razvije v join graf oblike $K_k + \overline{K}_{n-k}$. 
+Tu je $K_k$ poln graf z $k$ vozlišči, $\overline{K}_{n-k}$ pa množica izoliranih vozlišč, povezanih le na $K_k$. 
+Ta struktura ustvari velika razlika med stopnjami: vozlišča v $K_k$ imajo stopnjo blizu $n$, zunanja pa okoli $k$. 
 Pri večjih $k$ se začnejo dodajati povezave tudi med zunanjimi vozlišči, vendar osnovna zvezdasta oblika ostane prepoznavna.
 
 
