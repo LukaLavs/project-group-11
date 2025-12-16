@@ -42,7 +42,7 @@ method which finds both graphs which reach minimal *Second Complementary Zagreb 
     H = nx.gnm_random_graph(n, m)
     while not nx.is_connected(H):
         H = nx.gnm_random_graph(n, m) # Build starting graph
-    sa_min = SA(functions=FunctionsMin(), G=G, _type='min')
+    sa_min = SA(functions=FunctionsMin(), G=H, _type='min')
     G, min_cM2 = sa_min.simulated_annealing()
     # Similarly for max
     ```
