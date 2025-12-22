@@ -20,7 +20,7 @@ class Base(ABC):
         Example of layout function is nx.sprint_layout"""
         plt.figure(figsize=(6,6))
         pos = layout_fun(G)
-        nx.draw_networkx_nodes(G, pos, node_color='black',node_size=300)
+        nx.draw_networkx_nodes(G, pos, node_color='black',node_size=100)
         nx.draw_networkx_edges(G, pos, style='dotted')
         nx.draw_networkx_labels(G, pos, font_size=12, font_color='white')
         plt.axis("off")
@@ -181,7 +181,22 @@ if __name__ == "__main__":
         print(r"\end{tabular}")
 
     conjecture = Conjecture() 
-    print("min: ", conjecture.min.cM2(20, 7))
-    print("max: ", conjecture.max.cM2(20, 19))
-    conjecture.max.save_graph(conjecture.max.G(20, 19), "test_max.png")
-    conjecture.min.save_graph(conjecture.min.G(20, 7), "test_min.png")
+    # print("min: ", conjecture.min.cM2(20, 7))
+    # print("max: ", conjecture.max.cM2(20, 19))
+    # conjecture.max.save_graph(conjecture.max.G(20, 19), "test_max.png")
+    # conjecture.min.save_graph(conjecture.min.G(20, 7), "test_min.png")
+
+   
+    # for v in range(3, 21):
+    #     for n in range(2*v-1, 2*v-1 + 11):
+    #         cm2 = conjecture.min.cM2(n, v)
+    #         print("min: ", cm2)
+    #         conjecture.min.save_graph(conjecture.min.G(n, v), f"docs/report/appendix/graph_min__n{n}_v{v}_cM2{cm2}.png")
+
+
+
+    # for v in range(1, 21):
+    #     for n in range(ceil((3 + sqrt(1 + 8*v)) / 2), ceil((3 + sqrt(1 + 8*v)) / 2) + 10):
+    #         cm2 = conjecture.max.cM2(n, v)
+    #         print(cm2)
+    #         conjecture.max.save_graph(conjecture.max.G(n, v), f"docs/report/appendix/graph_max__n{n}_v{v}_cM2{cm2}.png")
